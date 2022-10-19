@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Use_Calculated_Funnel_Addition_Target__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Enabling this causes Funnel Addition Target to become a calculation based on Commit Case Accuracy for the previous period and Quota Amount</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enabling this causes Funnel Addition Target to become a calculation based on Commit Case Accuracy for the previous period and Quota Amount</inlineHelpText>
+    <label>Use Calculated Funnel Addition Target</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

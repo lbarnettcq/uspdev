@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Disable_Opportunity_Trigger__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Disables the Opportunity trigger when enabled</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Disables the Opportunity trigger when enabled</inlineHelpText>
+    <label>Disable Opportunity Trigger</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

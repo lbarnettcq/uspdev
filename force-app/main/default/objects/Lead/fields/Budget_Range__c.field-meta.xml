@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Budget_Range__c</fullName>
+    <externalId>false</externalId>
+    <label>Budget Range</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>&lt;$50K</fullName>
+                <default>false</default>
+                <label>&lt;$50K</label>
+            </value>
+            <value>
+                <fullName>$50-100K</fullName>
+                <default>false</default>
+                <label>$50-100K</label>
+            </value>
+            <value>
+                <fullName>$100-$500K</fullName>
+                <default>false</default>
+                <label>$100-$500K</label>
+            </value>
+            <value>
+                <fullName>&gt;$500K</fullName>
+                <default>false</default>
+                <label>&gt;$500K</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

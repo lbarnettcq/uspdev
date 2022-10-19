@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Territory__c</fullName>
+    <externalId>false</externalId>
+    <label>Territory</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Region_Global__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Territory</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>East Region</controllingFieldValue>
+            <valueName>North East</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>East Region</controllingFieldValue>
+            <valueName>Mid Atlantic</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>East Region</controllingFieldValue>
+            <valueName>South East</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Central Region</controllingFieldValue>
+            <valueName>Great Lakes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Central Region</controllingFieldValue>
+            <valueName>Mid West</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Central Region</controllingFieldValue>
+            <valueName>Mid South</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Central Region</controllingFieldValue>
+            <valueName>Permian</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>West &amp; Canada Region</controllingFieldValue>
+            <valueName>Canada</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>West &amp; Canada Region</controllingFieldValue>
+            <valueName>Mountain West</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>West &amp; Canada Region</controllingFieldValue>
+            <valueName>South West</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

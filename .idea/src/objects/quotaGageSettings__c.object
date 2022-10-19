@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Settings for how the Quota gauge calculates and renders on the home screen dashboard</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Gauge_Max_Value__c</fullName>
+        <defaultValue>150</defaultValue>
+        <description>Maximum % to chart on the Gauge. Default value is 150%.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Maximum % to chart on the Gauge. Default value is 150%.</inlineHelpText>
+        <label>Gauge Max Value</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Orange_Upper_Limit__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Maximum % on the gauge which renders ORANGE. Default value is 50%</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Maximum % on the gauge which renders ORANGE. Default value is 50%</inlineHelpText>
+        <label>Orange Upper Limit</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quota_Amount__c</fullName>
+        <defaultValue>218000000</defaultValue>
+        <description>Dollar amount used as a monthly goal for the 100% mark on the gauge.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Dollar amount used as a monthly goal for the 100% mark on the gauge. The Closed/Won Target (Monthly)</inlineHelpText>
+        <label>Quota Amount</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Red_Upper_Limit__c</fullName>
+        <defaultValue>100</defaultValue>
+        <description>Maximum % on the gauge which renders RED. Default value is 25%</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Maximum % on the gauge which renders RED. Default value is 25%</inlineHelpText>
+        <label>Red Upper Limit</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Static_Funnel_Addition_Target__c</fullName>
+        <defaultValue>1500000.00</defaultValue>
+        <description>When the &apos;Use Calculated Funnel Addition Target&apos; checkbox is disabled, this value will be used for all users with the appropriate Role/Profile when generating Funnel Addition Target data for a given period.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>When the &apos;Use Calculated Funnel Addition Target&apos; checkbox is disabled, this value will be used for all users with the appropriate Role/Profile when generating Funnel Addition Target data for a given period.</inlineHelpText>
+        <label>Static Funnel Addition Target</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Static_New_Product_Target__c</fullName>
+        <externalId>false</externalId>
+        <label>Static New Product Target</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Use_Calculated_Funnel_Addition_Target__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Enabling this causes Funnel Addition Target to become a calculation based on Commit Case Accuracy for the previous period and Quota Amount</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enabling this causes Funnel Addition Target to become a calculation based on Commit Case Accuracy for the previous period and Quota Amount</inlineHelpText>
+        <label>Use Calculated Funnel Addition Target</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Yellow_Upper_Limit__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Maximum % on the gauge which renders YELLOW. Default value is 75%</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Maximum % on the gauge which renders YELLOW. Default value is 75%</inlineHelpText>
+        <label>Yellow Upper Limit</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Quota Gauge Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

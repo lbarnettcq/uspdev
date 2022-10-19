@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Spam_trap_for_web_to_lead</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+CONTAINS(Description, &quot;auction&quot;),
+CONTAINS(Description, &quot;copyright&quot;),
+CONTAINS(Description, &quot;sex&quot;),
+CONTAINS(Description, &quot;viagra&quot;),
+CONTAINS(Description, &quot;vkmovie.ru&quot;),
+CONTAINS(Email, &quot;fevgen708@gmail.com&quot;),
+CONTAINS(Description, &quot;и&quot;),
+CONTAINS(Description, &quot;Это&quot;),
+CONTAINS(Description, &quot;seo&quot;),
+CONTAINS(Email, &quot;mail.ru&quot;),
+CONTAINS(Email, &quot;inbox.ru&quot;),
+CONTAINS(Email, &quot;JasonHok&quot;),
+CONTAINS(Email, &quot;list.ru&quot;),
+CONTAINS(Email, &quot;bk.ru&quot;),
+CONTAINS(Email, &quot;yandex.com&quot;),
+CONTAINS(Email, &quot;viagra&quot;),
+CONTAINS(Email, &quot;bizml.ru&quot;),
+CONTAINS(Email, &quot;yandex.ru&quot;),
+CONTAINS(Email, &quot;list.ru&quot;),
+CONTAINS(Email, &quot;bk.ru&quot;),
+CONTAINS(Email, &quot;dizaer.ru&quot;),
+CONTAINS(Email, &quot;.xyz&quot;),
+CONTAINS(Description, &quot;на&quot;),
+CONTAINS(Description, &quot;SEO&quot;),
+CONTAINS(Description, &quot;Россия&quot;),
+CONTAINS(Description, &quot;!!!!!!!!!!!!!!!!!&quot;),
+NOT(CONTAINS(Email, &quot;@&quot;))
+)</errorConditionFormula>
+    <errorMessage>This is Spam</errorMessage>
+</ValidationRule>

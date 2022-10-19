@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Static_Funnel_Addition_Target__c</fullName>
+    <defaultValue>1500000.00</defaultValue>
+    <description>When the &apos;Use Calculated Funnel Addition Target&apos; checkbox is disabled, this value will be used for all users with the appropriate Role/Profile when generating Funnel Addition Target data for a given period.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>When the &apos;Use Calculated Funnel Addition Target&apos; checkbox is disabled, this value will be used for all users with the appropriate Role/Profile when generating Funnel Addition Target data for a given period.</inlineHelpText>
+    <label>Static Funnel Addition Target</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

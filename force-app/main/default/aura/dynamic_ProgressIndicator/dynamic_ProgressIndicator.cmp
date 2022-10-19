@@ -1,0 +1,28 @@
+<aura:component >
+    <aura:attribute name="currentStage" type="String" />
+    <aura:attribute name="allStages" type="String" />
+    <aura:attribute name="stages" type="String[]" />
+
+    <aura:attribute name="ready" type="Boolean" />
+    <aura:attribute name="parsedDynamic" type="Boolean" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+    <aura:if isTrue="{!v.ready}">
+        <lightning:progressIndicator currentStep="{!v.currentStage}" type="path" variant="base">
+            <aura:if isTrue="{!v.parsedDynamic}">
+                <aura:iteration var="stage" items="{!v.stages}">
+                    <lightning:progressStep label="{!stage}" value="{!stage}" />
+                </aura:iteration>
+                <aura:set attribute="else">
+                    <lightning:progressStep label="0 - Target" value="0 - Target"/>
+                    <lightning:progressStep label="1 - Prospect" value="1 - Prospect"/>
+                    <lightning:progressStep label="2 - Qualified" value="2 - Qualified"/>
+                    <lightning:progressStep label="3 - Validated" value="3 - Validated"/>
+                    <lightning:progressStep label="4 - Proposal" value="4 - Proposal"/>
+                    <lightning:progressStep label="5 - Closed/Won" value="5 - Closed/Won"/>
+                </aura:set>
+            </aura:if>
+        </lightning:progressIndicator>
+    </aura:if>
+</aura:component>

@@ -1,0 +1,108 @@
+<apex:page standardController="Opportunity" extensions="opportunityPathController" id="opportunityPath" standardStylesheets="true" showHeader="false" docType="html-5.0">
+    <apex:includeLightning />
+
+    <div id="progress" style="margin: 10px;"/>
+    <div id="progressHelp" style="margin: 1em; vertical-align: top; text-align: center;">
+        <div id="actions" class="slds-scope" style="display:inline-block; width: 45%;
+        padding: 1em; background-color: lightgray; text-align: left; font-size: 0.9em;
+        margin-right: 0.75em; vertical-align: top;">
+            <div style="font-weight: bold; font-size: 1.25em; width: 49%; page-break-after: none;
+                display: inline-block;">ACTIONS</div>
+            <div style="font-size: 0.9em; text-align: right; width: 49%; page-break-before: none;
+                display: inline-block; text-decoration: underline;">Stage {!LEFT(currentStage,1)}</div>
+            <hr style="padding: 0px; margin: 0px; border-top: 1px solid darkgray;" />
+            <apex:outputPanel id="actions_0" rendered="{!LEFT(currentStage,3) == '0 -'}">
+                <strong>B</strong> - Ask about budget<br />
+                <strong>A</strong> - Identify stakeholders to determine level of complexity<br />
+                <strong>N</strong> - Uncover pain, need and rough opportunity size<br />
+                <strong>T</strong> - Request approximate timing
+            </apex:outputPanel>
+            <apex:outputPanel id="actions_1" rendered="{!LEFT(currentStage,3) == '1 -'}">
+                <strong>B</strong> - Ask about budget process<br />
+                <strong>A</strong> - Set up meeting with stakeholder(s) including Technical Buyer<br />
+                <strong>N</strong> - Consult with customer. Does the opportunity fit USP core served market?<br />
+                <strong>T</strong> - Request approximate timing
+            </apex:outputPanel>
+            <apex:outputPanel id="actions_2" rendered="{!LEFT(currentStage,3) == '2 -'}">
+                <strong>B</strong> - Confirm budget for USP core business, full service<br />
+                <strong>A</strong> - Offer survey if beneficial to quantify application<br />
+                <strong>N</strong> - Present and Value Sell solution, Identify Obstacles/Objections<br />
+                <strong>T</strong> - Request approximate timing
+            </apex:outputPanel>
+            <apex:outputPanel id="actions_3" rendered="{!LEFT(currentStage,3) == '3 -'}">
+                <strong>B</strong> - Reconfirm budget<br />
+                <strong>A</strong> - Confirm Economic Buyer; Identify internal Sponsor(s)<br />
+                <strong>N</strong> - Assess customer intent to accept USP's solution / survey work<br />
+                <strong>T</strong> - Ask customer to specify purchase cycle timing
+            </apex:outputPanel>
+            <apex:outputPanel id="actions_4" rendered="{!LEFT(currentStage,3) == '4 -'}">
+                <strong>B</strong> - Confirm funds are committed<br />
+                <strong>A</strong> - Confirm no additional obstacles to purchase<br />
+                <strong>N</strong> - Key Opinion leaders, Technical and Economical buyers  all verbally confirm USP solution is preferred<br />
+                <strong>T</strong> - Confirm process to issue POs and current PO status; Confirm commissioning date
+            </apex:outputPanel>
+            <apex:outputPanel id="actions_5" rendered="{!LEFT(currentStage,3) == '5 -'}">
+                <strong>B</strong> - Confirm funds are released, verbal or email commitment of the order<br />
+                <strong>A</strong> - Ensure TC's sign off, Reconfirm no additional obstacles to purchase<br />
+                <strong>N</strong> - Reconfirm needs have not changed<br />
+                <strong>T</strong> - Reconfirm specific timing for PO and commissioning
+            </apex:outputPanel>
+        </div>
+        <div id="criteria" class="slds-scope" style="display:inline-block; width: 45%;
+        padding: 1em; background-color: lightgray; text-align: left; font-size: 0.9em;;
+        margin-left: 0.75em; vertical-align: top;">
+            <strong style="font-size: 1.25em;">STAGE PROGRESSION CRITERIA</strong>
+            <hr style="padding: 0px; margin: 0px; border-top: 1px solid darkgray;" />
+            <apex:outputPanel id="criteria_0" rendered="{!LEFT(currentStage,3) == '0 -'}">
+                <strong>B</strong> - General budget availability<br />
+                <strong>A</strong> - Email and/or Phone from primary contact<br />
+                <strong>N</strong> - Statement of need and rough estimate of the opportunity size<br />
+                <strong>T</strong> - Timing estimate
+            </apex:outputPanel>
+            <apex:outputPanel id="criteria_1" rendered="{!LEFT(currentStage,3) == '1 -'}">
+                <strong>B</strong> - Full service model agreed by customer (non-capital)<br />
+                <strong>A</strong> - Milestone meeting; Stakeholder names provided; Technical Buyer identified<br />
+                <strong>N</strong> - Customer Application/ Specifications and clear definition of need<br />
+                <strong>T</strong> - Budget cycle identified; Purchase date (target year)
+            </apex:outputPanel>
+            <apex:outputPanel id="criteria_2" rendered="{!LEFT(currentStage,3) == '2 -'}">
+                <strong>B</strong> - Budget agreement<br />
+                <strong>A</strong> - Economic Buyer (decision maker) identified<br />
+                <strong>N</strong> - Confirm customer agrees with our proposed solution<br />
+                <strong>T</strong> - Identify timing for technical presentation / survey date
+            </apex:outputPanel>
+            <apex:outputPanel id="criteria_3" rendered="{!LEFT(currentStage,3) == '3 -'}">
+                <strong>B</strong> - Confirm that customers ROI and budget requirements met<br />
+                <strong>A</strong> - Review survey work/Agree USP solution preferred <br />
+                <strong>N</strong> - Specific product /solution confirmed, Obstacles/Objections are cleared<br />
+                <strong>T</strong> - Timing to summit and review proposal of USP solution
+            </apex:outputPanel>
+            <apex:outputPanel id="criteria_4" rendered="{!LEFT(currentStage,3) == '4 -'}">
+                <strong>B</strong> - Stakeholders committed to buy from USP<br />
+                <strong>A</strong> - TC's confirmed, conditions to buy USP negotiated <br />
+                <strong>N</strong> - Confirm needs have not changed and prefer USP<br />
+                <strong>T</strong> - Approval to place order (target week)
+            </apex:outputPanel>
+            <apex:outputPanel id="criteria_5" rendered="{!LEFT(currentStage,3) == '5 -'}">
+                <div style="text-align: center; font-weight: bold; width: 99%;
+                    margin-top: 1em; margin-bottom: 0.8em;">Order Received and ready to book; USP BAAN created</div>
+            </apex:outputPanel>
+        </div>
+    </div>
+
+    <script>
+         $Lightning.use(
+             "c:flowStages_GlobalApplication", // Name of Aura Dependency app where c is namespace.
+             function() { // Callback function
+                 $Lightning.createComponent(
+                     "c:dynamic_ProgressIndicator", // Name of Lightning Component where c is namespace.
+                     {
+                         "currentStage" : "{!currentStage}",
+                         "allStages" : "{!allStages}"
+                     },
+                     "progress" // Id of the element where Lightning Component will be rendered.
+                 );
+             }
+         );
+     </script>
+</apex:page>

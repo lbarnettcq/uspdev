@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Chemical__c</fullName>
+    <externalId>false</externalId>
+    <label>Chemical</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Hydrogen Peroxide</fullName>
+                <default>false</default>
+                <label>Hydrogen Peroxide</label>
+            </value>
+            <value>
+                <fullName>Ferrous Chloride</fullName>
+                <default>false</default>
+                <label>Ferrous Chloride</label>
+            </value>
+            <value>
+                <fullName>Ferric Chloride</fullName>
+                <default>false</default>
+                <label>Ferric Chloride</label>
+            </value>
+            <value>
+                <fullName>Ferric Sulfate</fullName>
+                <default>false</default>
+                <label>Ferric Sulfate</label>
+            </value>
+            <value>
+                <fullName>Sodium Hydroxide</fullName>
+                <default>false</default>
+                <label>Sodium Hydroxide</label>
+            </value>
+            <value>
+                <fullName>USP-OC31</fullName>
+                <default>false</default>
+                <label>USP-OC31</label>
+            </value>
+            <value>
+                <fullName>Peracetic Acid</fullName>
+                <default>false</default>
+                <label>Peracetic Acid</label>
+            </value>
+            <value>
+                <fullName>Sodium Bisulfite</fullName>
+                <default>false</default>
+                <label>Sodium Bisulfite</label>
+            </value>
+            <value>
+                <fullName>Nitrate</fullName>
+                <default>false</default>
+                <label>Nitrate</label>
+            </value>
+            <value>
+                <fullName>Ferrous Sulfate</fullName>
+                <default>false</default>
+                <label>Ferrous Sulfate</label>
+            </value>
+            <value>
+                <fullName>Sodium Persulfate</fullName>
+                <default>false</default>
+                <label>Sodium Persulfate</label>
+            </value>
+            <value>
+                <fullName>Klozur</fullName>
+                <default>false</default>
+                <label>Klozur</label>
+            </value>
+            <value>
+                <fullName>Cloevis Precursor</fullName>
+                <default>false</default>
+                <label>Cloevis Precursor</label>
+            </value>
+            <value>
+                <fullName>Sulfelox</fullName>
+                <default>false</default>
+                <label>Sulfelox</label>
+            </value>
+            <value>
+                <fullName>Chelated Fe</fullName>
+                <default>false</default>
+                <label>Chelated Fe</label>
+            </value>
+            <value>
+                <fullName>Calcium Hydroxide</fullName>
+                <default>false</default>
+                <label>Calcium Hydroxide</label>
+            </value>
+            <value>
+                <fullName>Sodium Hypochlorite</fullName>
+                <default>false</default>
+                <label>Sodium Hypochlorite</label>
+            </value>
+            <value>
+                <fullName>Permanganates Sodium</fullName>
+                <default>false</default>
+                <label>Permanganates Sodium</label>
+            </value>
+            <value>
+                <fullName>Permanganates Potassium</fullName>
+                <default>false</default>
+                <label>Permanganates Potassium</label>
+            </value>
+            <value>
+                <fullName>Magnesium Hydroxide</fullName>
+                <default>false</default>
+                <label>Magnesium Hydroxide</label>
+            </value>
+            <value>
+                <fullName>Hydrochloric Acid</fullName>
+                <default>false</default>
+                <label>Hydrochloric Acid</label>
+            </value>
+            <value>
+                <fullName>Sulfuric Acid</fullName>
+                <default>false</default>
+                <label>Sulfuric Acid</label>
+            </value>
+            <value>
+                <fullName>Nitric Acid</fullName>
+                <default>false</default>
+                <label>Nitric Acid</label>
+            </value>
+            <value>
+                <fullName>Citric Acid</fullName>
+                <default>false</default>
+                <label>Citric Acid</label>
+            </value>
+            <value>
+                <fullName>Acetic Acid</fullName>
+                <default>false</default>
+                <label>Acetic Acid</label>
+            </value>
+            <value>
+                <fullName>Caustic Soda</fullName>
+                <default>false</default>
+                <label>Caustic Soda</label>
+            </value>
+            <value>
+                <fullName>Sodium Percarbonate</fullName>
+                <default>false</default>
+                <label>Sodium Percarbonate</label>
+            </value>
+            <value>
+                <fullName>Specialty oxidants (USP-OC31E)</fullName>
+                <default>false</default>
+                <label>Specialty oxidants (USP-OC31E)</label>
+            </value>
+            <value>
+                <fullName>Equipment</fullName>
+                <default>false</default>
+                <label>Equipment</label>
+            </value>
+            <value>
+                <fullName>Service/Consulting</fullName>
+                <default>false</default>
+                <label>Service/Consulting</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>OptiCal</fullName>
+                <default>false</default>
+                <label>OptiCal</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>
