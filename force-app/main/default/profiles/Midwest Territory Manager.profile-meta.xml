@@ -46,11 +46,82 @@
         <field>Annual_Quota_Config__c.Rep__c</field>
         <readable>false</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition_Target__c.Fiscal_Year__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition_Target__c.Period__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition_Target__c.Territory__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition__c.Amount_at_Start__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition__c.Close_Date_at_End__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition__c.Close_Date_at_Start__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition__c.Current_Amount_FF__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition__c.Current_Amount__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition__c.Current_Period__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition__c.Opportunity__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition__c.Period__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition__c.Probability_At_End__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Funnel_Addition__c.Probability_At_Start__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
     <layoutAssignments>
         <layout>Annual_Funnel_Addition_Target_Config__c-Annual Funnel Addition Target Config Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Annual_Quota_Config__c-Annual Quota Config Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Funnel_Addition_Target__c-Funnel Addition Target Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Funnel_Addition__c-Funnel Addition Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Period_Config__c-Period Config Layout</layout>
