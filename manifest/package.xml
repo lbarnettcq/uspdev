@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>AccuracyAndTargetCalculator</members>
+        <members>AccuracyAndTargetEOPSchedulable</members>
+        <members>AccuracyAndTargetSOPSchedulable</members>
+        <members>AccuracyAndTargetTest</members>
+        <members>FunnelAdditionsSelector</members>
+        <members>HeirarchyProvider</members>
+        <members>HeirarchyProviderTest</members>
+        <members>OpportunityService</members>
+        <members>OpportunityTriggerHandler</members>
+        <members>PerformanceToPlanDataProvider</members>
+        <members>StringUtil</members>
+        <members>StringUtilTest</members>
+        <members>TestDataFactory</members>
+        <members>forecastItemDTO</members>
+        <members>forecastItemDTOTest</members>
+        <members>opportunityPathController</members>
+        <members>opportunityPathControllerTest</members>
+        <members>uspSalesReportController</members>
+        <members>uspSalesReportControllerTest</members>
+        <members>iSObjectSelector</members>
+        <members>SObjectSelector</members>
+        <members>FunnelAdditionSelector</members>
+        <members>FunnelAdditionTargetSelector</members>
+        <members>DefaultPeriodSelector</members>
+        <members>AnnualTargetUtils</members>
+        <members>CustomPeriodSelector</members>
+        <members>AnnualTargetSelector</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>opportunityPath</members>
+        <members>uspSalesReport</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>OpportunityTrigger</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>dynamic_ProgressIndicator</members>
+        <members>flowStages_GlobalApplication</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+    <types>
+        <members>Annual_Funnel_Addition_Target_Config__c</members>
+        <members>Annual_Quota_Config__c</members>
+        <members>CommitCaseAccuracyConfig__c</members>
+        <members>CommitCaseAccuracy__c</members>
+        <members>CommitCaseHistory__c</members>
+        <members>FunnelAdditionTarget__c</members>
+        <members>Funnel_Addition_Target__c</members>
+        <members>Funnel_Addition__c</members>
+        <members>Invoice__c</members>
+        <members>Order_Product__c</members>
+        <members>Order__c</members>
+        <members>Period_Config__c</members>
+        <members>Trigger_Config__c</members>
+        <members>quotaGageSettings__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <name>CompactLayout</name>
+    </types>
+    <types>
+        <members>Lead.Application__c</members>
+        <members>Lead.Budget_B__c</members>
+        <members>Lead.Budget_Range__c</members>
+        <members>Lead.CERCOMPLETED__c</members>
+        <members>Lead.CLASSIFICATION__c</members>
+        <members>Lead.Chemical__c</members>
+        <members>Lead.Comments__c</members>
+        <members>Lead.Department__c</members>
+        <members>Lead.Drivers__c</members>
+        <members>Lead.Email_Opt_Out__c</members>
+        <members>Lead.Email_Status_Change_Date__c</members>
+        <members>Lead.Email_Status__c</members>
+        <members>Lead.Estimated_Revenue_Year__c</members>
+        <members>Lead.External_Id__c</members>
+        <members>Lead.Geographic_Region__c</members>
+        <members>Lead.Industry__c</members>
+        <members>Lead.Installation_Date__c</members>
+        <members>Lead.Lead_Project_Manager__c</members>
+        <members>Lead.Lead_Record_Type__c</members>
+        <members>Lead.Method_of_Contact__c</members>
+        <members>Lead.Next_Step__c</members>
+        <members>Lead.OpportunityCoOwner__c</members>
+        <members>Lead.Owner__c</members>
+        <members>Lead.PROJECTNO__c</members>
+        <members>Lead.Past_Due_Link__c</members>
+        <members>Lead.Past_Due__c</members>
+        <members>Lead.Project_Type__c</members>
+        <members>Lead.Region_Global__c</members>
+        <members>Lead.Segment__c</members>
+        <members>Lead.Territory__c</members>
+        <members>Opportunity.Annual_Revenue__c</members>
+        <members>Opportunity.Budget_Confirmed__c</members>
+        <members>Opportunity.Budget_Range__c</members>
+        <members>Opportunity.CERCOMPLETED__c</members>
+        <members>Opportunity.CLASSIFICATION__c</members>
+        <members>Opportunity.Chemical_Global__c</members>
+        <members>Opportunity.Chemical__c</members>
+        <members>Opportunity.Comments__c</members>
+        <members>Opportunity.Contract_PO_Duration__c</members>
+        <members>Opportunity.Contract_PO_End_Date__c</members>
+        <members>Opportunity.Contract_PO_Start_Date__c</members>
+        <members>Opportunity.Current_Year_Revenue__c</members>
+        <members>Opportunity.Discovery_Completed__c</members>
+        <members>Opportunity.Drivers__c</members>
+        <members>Opportunity.Estimated_Monthly_Amount__c</members>
+        <members>Opportunity.Estimated_Revenue_Year__c</members>
+        <members>Opportunity.External_Id__c</members>
+        <members>Opportunity.Geographical_Region__c</members>
+        <members>Opportunity.Industry__c</members>
+        <members>Opportunity.Installation_Date__c</members>
+        <members>Opportunity.LEADPROJECTMANAGER__c</members>
+        <members>Opportunity.Loss_Reason__c</members>
+        <members>Opportunity.Monthly_Revenue__c</members>
+        <members>Opportunity.NEXT_STEP__c</members>
+        <members>Opportunity.Opportunity_CoOwner__c</members>
+        <members>Opportunity.Project_Number__c</members>
+        <members>Opportunity.Project_Type__c</members>
+        <members>Opportunity.ROI_Analysis_Completed__c</members>
+        <members>Opportunity.Region_Picklist__c</members>
+        <members>Opportunity.Segment__c</members>
+        <members>Opportunity.Strategic_Account__c</members>
+        <members>Opportunity.Territory__c</members>
+        <members>Opportunity.X450Days__c</members>
+        <members>Opportunity.X90days__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>CommitCaseAccuracy__c</members>
+        <members>CommitCaseHistory__c</members>
+        <members>FunnelAdditionTarget__c</members>
+        <members>Invoice__c</members>
+        <members>Order_Product__c</members>
+        <members>Order__c</members>
+        <members>Performance_Projection_Dashboard</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>NA_Sales_Dashboard_Folder</members>
+        <members>NA_Sales_Dashboard_Folder/Funnel_Review_Dashboard1</members>
+        <members>Sales_and_Marketing_Dashboards</members>
+        <members>Sales_and_Marketing_Dashboards/NA_Operations_Dashboard</members>
+        <name>Dashboard</name>
+    </types>
+    <types>
+        <members>Opportunity_Flow</members>
+        <members>funnelTargetTrigger</members>
+        <name>Flow</name>
+    </types>
+    <types>
+        <members>Fiscal_Year</members>
+        <members>Period</members>
+        <name>GlobalValueSet</name>
+    </types>
+    <types>
+        <members>Canada</members>
+        <members>Central_Region</members>
+        <members>East_Region</members>
+        <members>Florida</members>
+        <members>Great_Lakes</members>
+        <members>Mid_Atlantic_Territory</members>
+        <members>Mid_South</members>
+        <members>Mid_West</members>
+        <members>Mountain_West</members>
+        <members>NA_Sales_View</members>
+        <members>North_East_Territory</members>
+        <members>Northern_CA</members>
+        <members>Northwest</members>
+        <members>Rocky_Mountain</members>
+        <members>South_West</members>
+        <members>Southeast_Territory</members>
+        <members>Southern_CA</members>
+        <members>West_Region</members>
+        <name>Group</name>
+    </types>
+    <types>
+        <members>Account-Account Layout</members>
+        <members>AccountContactRelation-Account Contact Relationship Layout</members>
+        <members>AccountTeamMember-Account Team Member Layout</members>
+        <members>Annual_Funnel_Addition_Target_Config__c-Annual Funnel Addition Target Config Layout</members>
+        <members>Annual_Quota_Config__c-Annual Quota Config Layout</members>
+        <members>Asset-Asset Layout</members>
+        <members>AssetRelationship-Asset Relationship Layout</members>
+        <members>AuthorizationForm-Authorization Form Layout</members>
+        <members>AuthorizationFormConsent-Authorization Form Consent Layout</members>
+        <members>AuthorizationFormDataUse-Authorization Form Data Use Layout</members>
+        <members>AuthorizationFormText-Authorization Form Text Layout</members>
+        <members>BusinessBrand-Business Brand Layout</members>
+        <members>Campaign-Campaign Layout</members>
+        <members>CampaignInfluenceModel-Campaign Influence Model Layout</members>
+        <members>CampaignMember-Campaign Member Page Layout</members>
+        <members>Case-Case Layout</members>
+        <members>CaseClose-Close Case Layout</members>
+        <members>CaseInteraction-Case Feed Layout</members>
+        <members>CollaborationGroup-Group Layout</members>
+        <members>CommitCaseAccuracy__c-CommitCaseAccuracy Layout</members>
+        <members>CommitCaseHistory__c-CommitCaseHistory Layout</members>
+        <members>Contact-Contact Layout</members>
+        <members>ContactPointAddress-Contact Point Address Layout</members>
+        <members>ContactPointEmail-Contact Point Email Layout</members>
+        <members>ContactPointPhone-Contact Point Phone Layout</members>
+        <members>ContactPointTypeConsent-Contact Point Type Consent Layout</members>
+        <members>ContentVersion-Content Version</members>
+        <members>Contract-Contract Layout</members>
+        <members>Customer-Customer Layout</members>
+        <members>DataUseLegalBasis-Data Use Legal Basis Layout</members>
+        <members>DataUsePurpose-Data Use Purpose Layout</members>
+        <members>DuplicateRecordSet-Duplicate Record Set Layout</members>
+        <members>EmailMessage-Email Message Layout</members>
+        <members>Event-Event Layout</members>
+        <members>FeedItem-Feed Item Layout</members>
+        <members>FunnelAdditionTarget__c-FunnelAdditionTarget Layout</members>
+        <members>Funnel_Addition_Target__c-Funnel Addition Target Layout</members>
+        <members>Funnel_Addition__c-Funnel Addition Layout</members>
+        <members>Global-Global Layout</members>
+        <members>Idea-Idea Layout</members>
+        <members>Individual-Individual Layout</members>
+        <members>Invoice__c-Invoice Layout</members>
+        <members>Lead-Lead Layout</members>
+        <members>ListEmail-List Email Layout</members>
+        <members>Macro-Macro Layout</members>
+        <members>Opportunity-Opportunity Layout</members>
+        <members>OpportunityContactRole-Opportunity Contact Role Layout</members>
+        <members>OpportunityLineItem-Opportunity Product Layout</members>
+        <members>OpportunitySplit-Opportunity Split Layout</members>
+        <members>OpportunityTeamMember-Opportunity Team Member Layout</members>
+        <members>Order-Order Layout</members>
+        <members>OrderItem-Order Product Layout</members>
+        <members>Order_Product__c-Order Product Layout</members>
+        <members>Order__c-Order Layout</members>
+        <members>Period_Config__c-Period Config Layout</members>
+        <members>Pricebook2-Price Book Layout</members>
+        <members>PricebookEntry-Price Book Entry Layout</members>
+        <members>ProcessException-Process Exception Layout</members>
+        <members>Product2-Product Layout</members>
+        <members>ProfileSkill-Skill Layout</members>
+        <members>ProfileSkillEndorsement-Endorsement Layout</members>
+        <members>ProfileSkillUser-Skill User Layout</members>
+        <members>QuickText-Quick Text Layout</members>
+        <members>Quote-Quote Layout</members>
+        <members>QuoteLineItem-Quote Line Item Layout</members>
+        <members>Scorecard-Scorecard Layout</members>
+        <members>ScorecardAssociation-Scorecard Association Layout</members>
+        <members>ScorecardMetric-Scorecard Metric Layout</members>
+        <members>Seller-Seller Layout</members>
+        <members>ServiceAppointmentGroup-Service Appointment Group Layout</members>
+        <members>SocialPersona-Social Persona Layout</members>
+        <members>SocialPost-Social Post Layout</members>
+        <members>Solution-Solution Layout</members>
+        <members>Task-Task Layout</members>
+        <members>User-User Layout</members>
+        <members>UserAlt-User Profile Layout</members>
+        <members>UserAppMenuItem-Application Layout</members>
+        <members>UserProvAccount-User Provisioning Account Layout</members>
+        <members>UserProvisioningLog-User Provisioning Log Layout</members>
+        <members>UserProvisioningRequest-User Provisioning Request Layout</members>
+        <members>WorkAccess-Access Layout</members>
+        <members>WorkBadge-Badge Layout</members>
+        <members>WorkBadge-Badge Received Layout 192</members>
+        <members>WorkBadgeDefinition-Badge Definition Layout</members>
+        <members>WorkBadgeDefinition-Badge Layout 192</members>
+        <members>WorkProcedure-Work Procedure Layout</members>
+        <members>WorkProcedureStep-Work Procedure Step Layout</members>
+        <members>WorkThanks-Thanks Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Lead.AllOpenLeads</members>
+        <members>Lead.All_Past_Dues</members>
+        <members>Lead.Central_Region_List_View</members>
+        <members>Lead.East_Region_List_View</members>
+        <members>Lead.Open_Leads_Management_View</members>
+        <members>Lead.TodaysLeads</members>
+        <members>Lead.Trade_Show_Leads</members>
+        <members>Lead.West_and_Canada_List_View</members>
+        <members>Lead.Your_Leads</members>
+        <members>Opportunity.Central_Region_View</members>
+        <members>Opportunity.ClosingNextMonth</members>
+        <members>Opportunity.ClosingThisMonth</members>
+        <members>Opportunity.Default_Opportunity_Pipeline</members>
+        <members>Opportunity.East_Regional_Territories</members>
+        <members>Opportunity.Mountain_West_Opps</members>
+        <members>Opportunity.MyOpportunities</members>
+        <members>Opportunity.NewThisWeek</members>
+        <members>Opportunity.West_region</members>
+        <members>Opportunity.Won</members>
+        <name>ListView</name>
+    </types>
+    <types>
+        <members>Access_Policy</members>
+        <members>Converted_Leads</members>
+        <members>Regional_Manager_Access</members>
+        <members>Sales_User</members>
+        <members>Set_Audit_Fields</members>
+        <members>Standard_User</members>
+        <members>cObject_Access</members>
+        <members>cObject_Edit_Only</members>
+        <members>cObject_Read_Only</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
+        <members>Admin</members>
+        <members>CPQ Integration User</members>
+        <members>Canada Territory Manager</members>
+        <members>Central Regional Manager</members>
+        <members>Chatter External User</members>
+        <members>Chatter Free User</members>
+        <members>Chatter Moderator User</members>
+        <members>ContractManager</members>
+        <members>East Regional Manager</members>
+        <members>Florida Territory Manager</members>
+        <members>Great Lakes Territory Manager</members>
+        <members>Guest License User</members>
+        <members>Identity User</members>
+        <members>MarketingProfile</members>
+        <members>Mid Atlantic Territory Manager</members>
+        <members>Mid South Territory Manager</members>
+        <members>Midwest Territory Manager</members>
+        <members>Minimum Access - Salesforce</members>
+        <members>Mountain Territory Manager</members>
+        <members>Northeast Territory Manager</members>
+        <members>Northwest Territory Manager</members>
+        <members>Read Only</members>
+        <members>Rocky Mountain Territory Manager</members>
+        <members>Sales Insights Integration User</members>
+        <members>SalesforceIQ Integration User</members>
+        <members>SolutionManager</members>
+        <members>Southeast Territory Manager</members>
+        <members>Southwest Territory Manager</members>
+        <members>Standard</members>
+        <members>System Administrator Enhanced</members>
+        <members>USP Standard User</members>
+        <members>West Regional Manager</members>
+        <name>Profile</name>
+    </types>
+    <types>
+        <members>Account.Child_Account</members>
+        <members>Campaign.Child_Campaign</members>
+        <members>Case.NewChildCase</members>
+        <members>CollaborationGroup.NewGroupMember</members>
+        <members>CollaborationGroup.NewGroupRecord</members>
+        <members>FeedItem.NewTaskFromFeedItem</members>
+        <members>Follow_Up</members>
+        <members>LogACall</members>
+        <members>NewAccount</members>
+        <members>NewCase</members>
+        <members>NewContact</members>
+        <members>NewEvent</members>
+        <members>NewGroup</members>
+        <members>NewLead</members>
+        <members>NewOpportunity</members>
+        <members>NewTask</members>
+        <members>Quote.SendEmail</members>
+        <members>SendEmail</members>
+        <members>Task.Defer</members>
+        <members>Task.Defer_0</members>
+        <members>Task.Defer_1</members>
+        <members>Task.Defer_2</members>
+        <members>Task.Defer_3</members>
+        <members>Task.Defer_4</members>
+        <members>Task.Defer_5</members>
+        <members>Task.Defer_6</members>
+        <members>Task.Defer_7</members>
+        <members>Task.EditDescription</members>
+        <members>Task.EditDescription_0</members>
+        <members>Task.EditDescription_1</members>
+        <members>Task.EditDescription_2</members>
+        <members>Task.EditDescription_3</members>
+        <members>Task.EditDescription_4</members>
+        <members>Task.EditDescription_5</members>
+        <members>Task.EditDescription_6</members>
+        <members>Task.EditDescription_7</members>
+        <members>Task.UpdatePriority</members>
+        <members>Task.UpdatePriority_0</members>
+        <members>Task.UpdatePriority_1</members>
+        <members>Task.UpdatePriority_2</members>
+        <members>Task.UpdatePriority_3</members>
+        <members>Task.UpdatePriority_4</members>
+        <members>Task.UpdatePriority_5</members>
+        <members>Task.UpdatePriority_6</members>
+        <members>Task.UpdatePriority_7</members>
+        <members>Task.UpdateStatus</members>
+        <members>Task.UpdateStatus_0</members>
+        <members>Task.UpdateStatus_1</members>
+        <members>Task.UpdateStatus_2</members>
+        <members>Task.UpdateStatus_3</members>
+        <members>Task.UpdateStatus_4</members>
+        <members>Task.UpdateStatus_5</members>
+        <members>Task.UpdateStatus_6</members>
+        <members>Task.UpdateStatus_7</members>
+        <name>QuickAction</name>
+    </types>
+    <types>
+        <members>DashboardReportsAdoption</members>
+        <members>DashboardReportsAdoption/UsageActivitiesCompleted</members>
+        <members>NASalesDashboardReports</members>
+        <members>NASalesDashboardReports/Amount_of_Open_Opps_next_12Months</members>
+        <members>NASalesDashboardReports/Closed_Won</members>
+        <members>NASalesDashboardReports/Commit_Case_Accuracy</members>
+        <members>NASalesDashboardReports/Contract_End_This_CY</members>
+        <members>NASalesDashboardReports/Copy_of_Opportunity_AmountStageNext60_0UN</members>
+        <members>NASalesDashboardReports/Funnel_Addition_Target_with_Period_Funne</members>
+        <members>NASalesDashboardReports/Funnel_Addition_Targets_V2</members>
+        <members>NASalesDashboardReports/NPFAT_with_Period_Funnel</members>
+        <members>NASalesDashboardReports/NewProduct_FAT</members>
+        <members>NASalesDashboardReports/Opportunity_AmountStage90450_rCZ</members>
+        <members>NASalesDashboardReports/Opportunity_AmountStageLast_30_Days_nyX</members>
+        <members>NASalesDashboardReports/Opportunity_AmountStageNext_90_iSi</members>
+        <members>NASalesDashboardReports/Opportunity_Funnel_Report</members>
+        <members>NASalesDashboardReports/Top_10_Opps_30_Days_S8f</members>
+        <members>NASalesDashboardReports/Top_10_Opps_60_Days_2cE</members>
+        <members>NASalesDashboardReports/Top_10_Opps_90450_z4J</members>
+        <members>NASalesDashboardReports/Top_10_Opps_90_Days_gWl</members>
+        <members>NASalesDashboardReports/USP12MonthNewProductFunnel</members>
+        <members>Project_Management_Reports</members>
+        <members>Project_Management_Reports/YTDOPS</members>
+        <members>Sales_Marketing_Reports</members>
+        <members>Sales_Marketing_Reports/Closed_Lost_by_Reason</members>
+        <members>Sales_Marketing_Reports/Closed_Won_80_This_Q_by_Owner</members>
+        <members>Sales_Marketing_Reports/Closed_Won_This_Q_by_Owner</members>
+        <members>Sales_Marketing_Reports/Closed_Won_This_Q_by_Type</members>
+        <members>Sales_Marketing_Reports/Closed_Won_by_Type</members>
+        <members>Sales_Marketing_Reports/Contract_by_Owner</members>
+        <members>Sales_Marketing_Reports/Contracts_and_Orders_Ending_next_12mo</members>
+        <members>Sales_Marketing_Reports/Conversion_Rate</members>
+        <members>Sales_Marketing_Reports/Funnal_Additions</members>
+        <members>Sales_Marketing_Reports/Funnel_Addition_Target</members>
+        <members>Sales_Marketing_Reports/Hot_Leads_w_o_Activity_96_Hours</members>
+        <members>Sales_Marketing_Reports/Leads_Converted_All_Time</members>
+        <members>Sales_Marketing_Reports/Leads_Converted_Current_FQ2</members>
+        <members>Sales_Marketing_Reports/Leads_Converted_by_FQ</members>
+        <members>Sales_Marketing_Reports/Leads_Created_Current_FQ</members>
+        <members>Sales_Marketing_Reports/Open_Oppties_This_Q</members>
+        <members>Sales_Marketing_Reports/Open_Oppties_This_Q_No_Acti_Last_96hrs</members>
+        <members>Sales_Marketing_Reports/Optical_Opportunities</members>
+        <members>Sales_Marketing_Reports/Pipeline_Report_This_Q</members>
+        <members>Sales_Marketing_Reports/Win_Ratio</members>
+        <members>Sales_Marketing_Reports/Your_Leads</members>
+        <members>Sales_and_Marketing_Reports</members>
+        <members>Sales_and_Marketing_Reports/Accounts_w_Improper_Owner</members>
+        <members>Sales_and_Marketing_Reports/Activities_by_Salesperson</members>
+        <members>Sales_and_Marketing_Reports/CampaignROIbyCampaignType</members>
+        <members>Sales_and_Marketing_Reports/CampaignsbyROI</members>
+        <members>Sales_and_Marketing_Reports/Closed_Deals_leader_board</members>
+        <members>Sales_and_Marketing_Reports/Closed_opportunity</members>
+        <members>Sales_and_Marketing_Reports/Leads_by_Industry</members>
+        <members>Sales_and_Marketing_Reports/LeadsbySource</members>
+        <members>Sales_and_Marketing_Reports/Marketing_Exec_Amount_per_Camp</members>
+        <members>Sales_and_Marketing_Reports/Marketing_Exec_Conversion_Rate</members>
+        <members>Sales_and_Marketing_Reports/Marketing_Exec_Converted_Amount</members>
+        <members>Sales_and_Marketing_Reports/Marketing_Exec_Converted_and_Won_Amount</members>
+        <members>Sales_and_Marketing_Reports/Marketing_Exec_Converted_by_Month</members>
+        <members>Sales_and_Marketing_Reports/Marketing_Exec_Lead_Trends_by_Status</members>
+        <members>Sales_and_Marketing_Reports/Marketing_Exec_Leads_Converted</members>
+        <members>Sales_and_Marketing_Reports/Marketing_Exec_Leads_by_Campaigns</members>
+        <members>Sales_and_Marketing_Reports/Marketing_Exec_of_Leads</members>
+        <members>Sales_and_Marketing_Reports/OpportunityProductPipeline</members>
+        <members>Sales_and_Marketing_Reports/Opps_w_Bad_Owner</members>
+        <members>Sales_and_Marketing_Reports/Opps_w_Future_Close_Dates</members>
+        <members>Sales_and_Marketing_Reports/Past_Due_Leads</members>
+        <members>Sales_and_Marketing_Reports/Past_Due_Leads_By_User</members>
+        <members>Sales_and_Marketing_Reports/SP_Current_Month_Open_Pipeline</members>
+        <members>Sales_and_Marketing_Reports/Sales_Exec</members>
+        <members>Sales_and_Marketing_Reports/Sales_Exec_Bookings_Trend</members>
+        <members>Sales_and_Marketing_Reports/Sales_Exec_Closed_Deals_QTD</members>
+        <members>Sales_and_Marketing_Reports/Sales_Exec_Lost_Deals</members>
+        <members>Sales_and_Marketing_Reports/Sales_Exec_Open_Deals</members>
+        <members>Sales_and_Marketing_Reports/Sales_Exec_Open_Pipeline</members>
+        <members>Sales_and_Marketing_Reports/Sales_Exec_Open_Pipeline_next_90_days</members>
+        <members>Sales_and_Marketing_Reports/Sales_Exec_Top_Closed_Deals</members>
+        <members>Sales_and_Marketing_Reports/Sales_Manager_Closed_Deals</members>
+        <members>Sales_and_Marketing_Reports/Sales_Manager_Open_Opportunities</members>
+        <members>Sales_and_Marketing_Reports/Sales_Manager_Open_Pipeline</members>
+        <members>Sales_and_Marketing_Reports/Sales_Manager_Pipeline_Next_90_days</members>
+        <members>Sales_and_Marketing_Reports/Sales_Person_Activities_Completed</members>
+        <members>Sales_and_Marketing_Reports/Sales_Person_Activity</members>
+        <members>Sales_and_Marketing_Reports/Sales_Person_MTD_Sales</members>
+        <members>Sales_and_Marketing_Reports/Sales_Person_Open_Pipeline_by_stage</members>
+        <members>Sales_and_Marketing_Reports/SulFeLox_Opportunities</members>
+        <members>Sales_and_Marketing_Reports/WEFTEC_2021_Leads_Report</members>
+        <members>Sales_and_Marketing_Reports/WEFTEC_2021_Opportunities</members>
+        <members>West_Region_Shared_Reports</members>
+        <members>West_Region_Shared_Reports/OptiCal_Funnel_Additions</members>
+        <members>West_Region_Shared_Reports/PRI_TECH_Funnel_Additions</members>
+        <members>West_Region_Shared_Reports/SulFeLox_Funnel_Additions</members>
+        <members>West_Region_Shared_Reports/West_hydrogen_peroxide</members>
+        <members>West_Region_Shared_Reports/west_calcium_nitrate</members>
+        <members>West_Region_Shared_Reports/west_ferric</members>
+        <members>West_Region_Shared_Reports/west_ferrous_chloride</members>
+        <name>Report</name>
+    </types>
+    <types>
+        <members>Canada_Territory_Manager</members>
+        <members>Central_Regional_Manager</members>
+        <members>Director_of_North_American_Sales</members>
+        <members>East_Regional_Manager</members>
+        <members>Florida</members>
+        <members>Great_Lakes_Territory</members>
+        <members>Mid_Atlantic_Territory_Manager</members>
+        <members>Mid_South_Territory_Manager</members>
+        <members>Mid_West_Territory_Manager</members>
+        <members>Mountain_West</members>
+        <members>North_East_Territory_Manager</members>
+        <members>Rocky_Mtn_Territory_Manager</members>
+        <members>South_East_Territory_Manager</members>
+        <members>South_West_Territory_Manager</members>
+        <members>Standard_User</members>
+        <members>West_Regional_Manager</members>
+        <name>Role</name>
+    </types>
+    <types>
+        <members>Lead.Spam_trap_for_web_to_lead</members>
+        <members>Opportunity.Contract_End_Date_Validation</members>
+        <members>Opportunity.Contract_Start_Date</members>
+        <members>Opportunity.Start_Date_Req</members>
+        <name>ValidationRule</name>
+    </types>
+    <version>55.0</version>
+</Package>
