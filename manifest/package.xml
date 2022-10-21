@@ -28,6 +28,9 @@
         <members>AnnualTargetUtils</members>
         <members>CustomPeriodSelector</members>
         <members>AnnualTargetSelector</members>
+        <members>AnnualTargetConfigTriggerHandler</members>
+        <members>AnnualQuotaConfigTriggerHandler</members>
+        <members>AnnualQuotaSelector</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -37,6 +40,8 @@
     </types>
     <types>
         <members>OpportunityTrigger</members>
+        <members>AnnualTargetConfigTrigger</members>
+        <members>AnnualQuotaConfidTrigger</members>
         <name>ApexTrigger</name>
     </types>
     <types>

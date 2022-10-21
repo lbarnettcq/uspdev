@@ -3,7 +3,7 @@
     <fullName>AnnualTarget__c</fullName>
     <externalId>false</externalId>
     <label>Target(Annualized)</label>
-    <precision>8</precision>
+    <precision>14</precision>
     <required>false</required>
     <scale>2</scale>
     <trackTrending>false</trackTrending>
