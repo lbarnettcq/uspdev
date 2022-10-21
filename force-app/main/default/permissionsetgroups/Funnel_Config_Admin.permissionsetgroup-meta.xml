@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Funnel Config Admin</label>
+    <permissionSets>Access_Policy</permissionSets>
+    <permissionSets>Apex_Class_Access</permissionSets>
+    <permissionSets>Funnel_Addition_Config_Admin</permissionSets>
+    <permissionSets>Use_New_FAT_Functionality</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>
