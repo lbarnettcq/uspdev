@@ -521,7 +521,7 @@ public with sharing class UnitOfWork implements iUnitOfWork{
 
         OnDMLStarting();
         insertDmlByType();
-        //updateDmlByType();
+        updateDmlByType();
         //deleteDmlByType();
         emptyRecycleBinByType();
         resolveEmailRelationships();

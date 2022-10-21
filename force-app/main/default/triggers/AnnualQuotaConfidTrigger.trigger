@@ -7,5 +7,9 @@
  */
 
 trigger AnnualQuotaConfidTrigger on Annual_Quota_Config__c (before insert, before update, before delete, after insert, after update, after delete, after undelete) {
-    AnnualQuotaConfigTriggerHandler.Execute();
+    Trigger_Config__c settings = Trigger_Config__c.getInstance();
+    if(settings.Disable_Triggers__c == false) {
+        AnnualQuotaConfigTriggerHandler.Execute();
+    }
+
 }

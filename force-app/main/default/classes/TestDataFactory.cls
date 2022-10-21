@@ -57,7 +57,7 @@ public with sharing class TestDataFactory {
     //create test data methods
     public static void init(){
         insertAccount();
-        insertUsers();
+        insertUsers(false);
         insertOpportunity();
         insertQuotaAmount();
     }
@@ -78,7 +78,7 @@ public with sharing class TestDataFactory {
         return [SELECT Id FROM Profile WHERE Name =:name LIMIT 1];
     }
 
-    public static void insertUsers() {
+    public static void insertUsers(Boolean NewFunnelTargetAdminUser) {
         List<User> users = new List<User>();
 
         Profile p = getProfile('Standard User');
@@ -105,6 +105,9 @@ public with sharing class TestDataFactory {
         }
 
         insert users;
+        if(NewFunnelTargetAdminUser) {
+            assignNewFATFunctionality(users);
+        }
     }
 
 
@@ -158,6 +161,21 @@ public with sharing class TestDataFactory {
         );
 
         insert quota;
+    }
+
+    public static void assignNewFATFunctionality(List<User> user) {
+        //User u = [SELECT Id FROM User WHERE LastName Like 'lastName%' LIMIT 1];
+        List<PermissionSetAssignment> newAssignments = new List<PermissionSetAssignment>();
+
+        for(User u : user) {
+            PermissionSetGroup grouping = [SELECT Id, DeveloperName FROM PermissionSetGroup WHERE
+                    DeveloperName='Funnel_Config_Admin' LIMIT 1];
+            PermissionSetAssignment assignment = new PermissionSetAssignment();
+            assignment.PermissionSetGroupId = grouping.Id;
+            assignment.AssigneeId = u.Id;
+        }
+
+        insert newAssignments;
     }
 
 

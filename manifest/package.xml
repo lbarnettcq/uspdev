@@ -31,6 +31,10 @@
         <members>AnnualTargetConfigTriggerHandler</members>
         <members>AnnualQuotaConfigTriggerHandler</members>
         <members>AnnualQuotaSelector</members>
+        <members>UserSelector</members>
+        <members>SecurityHandler</members>
+        <members>OpportunityServiceTest</members>
+        <members>OpportunitySelector</members>
         <name>ApexClass</name>
     </types>
     <types>

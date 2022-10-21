@@ -1,5 +1,5 @@
 public without sharing class OpportunityTriggerHandler {
-    private static Boolean debugOn = Test.isRunningTest();
+    private static Boolean debugOn = false; //Test.isRunningTest();
 
     public static void Execute() {
         if (!Trigger.isExecuting) { return; }
@@ -16,46 +16,25 @@ public without sharing class OpportunityTriggerHandler {
     }
 
     private static void beforeInsertUpdate() {
-        /*
-        List<Opportunity> newRecords = (List<Opportunity>) Trigger.new;
-
-        for (Opportunity opp : newRecords) {
-            if (opp.Contract_PO_Start_Date__c == null
-                    || opp.Contract_PO_Duration__c == null
-                    || opp.Amount == null) { continue; }
-            Date startDate = opp.Contract_PO_Start_Date__c;
-
-            Integer duration = opp.Contract_PO_Duration__c.intValue();
-            Decimal monthlyRevenue = opp.Monthly_Revenue__c;
-            Decimal amount = opp.Amount;
-
-
-            if (duration == 0
-                    || duration == null) {
-                monthlyRevenue = amount;
-                opp.Contract_PO_End_Date__c = startDate;
-                System.debug('no duration revenue: ' + monthlyRevenue);
-                System.debug('no duration end date ' + opp.Contract_PO_End_Date__c);
-            }else{
-                monthlyRevenue = amount/duration;
-                opp.Contract_PO_End_Date__c = startDate.addMonths(duration);
-                System.debug('Calculated revenue ' + monthlyRevenue);
-                System.debug('Calculated end date ' + opp.Contract_PO_End_Date__c);
-            }
-
-            //opp.Contract_PO_End_Date__c = endDate;
-            opp.Monthly_Revenue__c = monthlyRevenue;
-            System.debug('opportunity : ' + opp);
+        String key = UserInfo.getUserId();
+        Set<Id> keyset = new Set<Id>();
+        keyset.add(Id.valueOf(key));
+        UserSelector selector = new UserSelector();
+        if(SecurityHandler.App.HasAccessToFeature('Use_New_FAT_Functionality')) {
+            System.debug('#### Using New FAT Functionality');
         }
-
-         */
 
 
     }
 
     private static void afterInsertUpdate() {
+
         Map<Id, Opportunity> newRecords = (Map<Id, Opportunity>) Trigger.newMap;
         Map<Id, Opportunity> oldRecords = Trigger.isInsert ? new Map<Id, Opportunity>() : (Map<Id, Opportunity>) Trigger.oldMap;
+        if(SecurityHandler.App.HasAccessToFeature('Use_New_FAT_Functionality')) {
+            System.debug('#### Using New FAT Functionality');
+            OpportunityService.Actions.AfterInsertServices(newRecords, oldRecords);
+        }
 
         List<Period> allPeriods = [
                 SELECT Id, StartDate, EndDate, Number FROM Period

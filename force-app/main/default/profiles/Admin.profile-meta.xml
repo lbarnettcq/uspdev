@@ -70,6 +70,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>OpportunityService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>OpportunityTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>OrderBy</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -91,6 +99,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SchemaHelper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SecurityHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -119,6 +131,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>UnitOfWork</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>UserSelector</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -194,6 +210,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Annual_Quota_Config__c.Annual_Quote_Config_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Annual_Quota_Config__c.IsSeller__c</field>
         <readable>true</readable>
@@ -206,6 +227,21 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Annual_Quota_Config__c.Rep__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Annual_Quota_Config__c.Territory__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Funnel_Addition_Target__c.Amount_at_Start__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Funnel_Addition_Target__c.Current_Amount__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

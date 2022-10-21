@@ -47,4 +47,8 @@ public with sharing class FunnelAdditionSelector extends SObjectSelector {
         List<Funnel_Addition__c> targets = GetQueryFactory().WithCriteria(Criteria.ValueIn(Funnel_Addition__c.Opportunity__c, keyset)).Execute();
         return targets;
     }
+
+    public List<Funnel_Addition__c> GetAll() {
+        return queryAll();
+    }
 }
