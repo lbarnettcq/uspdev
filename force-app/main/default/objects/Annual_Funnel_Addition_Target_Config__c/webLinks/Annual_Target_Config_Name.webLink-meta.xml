@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Annual_Target_Config_Name</fullName>
+    <availability>online</availability>
+    <displayType>link</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Annual Target Config Name</masterLabel>
+    <openType>noSidebar</openType>
+    <protected>false</protected>
+    <url>/lightning/Id={!Annual_Funnel_Addition_Target_Config__c.Id}</url>
+</WebLink>
