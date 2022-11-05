@@ -236,7 +236,7 @@ public inherited sharing class QueryFactory implements iQueryFactory{
         soql += generateOrderBy();
         soql += generateLimit();
         if (Test.isRunningTest()) {
-            System.debug(LOG_PREFIX + 'Generated SOQL :: ' + soql);
+            //System.debug(LOG_PREFIX + 'Generated SOQL :: ' + soql);
         }
         return soql;
     }
@@ -252,7 +252,7 @@ public inherited sharing class QueryFactory implements iQueryFactory{
         soql += generateFrom(relateOn);
         soql += generateWhere();
         if (Test.isRunningTest()) {
-            System.debug(LOG_PREFIX + 'Generated SOQL :: ' + soql);
+            //System.debug(LOG_PREFIX + 'Generated SOQL :: ' + soql);
         }
         return soql;
     }

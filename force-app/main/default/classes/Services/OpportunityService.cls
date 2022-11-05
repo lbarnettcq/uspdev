@@ -27,30 +27,41 @@ public with sharing class OpportunityService {
         Map<Id, Funnel_Addition__c> currentFunnelAdditions = new Map<Id, Funnel_Addition__c>();
         currentFunnelAdditions.putAll(funnelAdditionSelector.GetAll());
         Map<String, String> iFunnelAdditionMap = new Map<String, String>();
+        AnnualQuotaSelector quotaSelector = new AnnualQuotaSelector();
         for(Id key : oldRecords.keySet()) {
             Opportunity oldOpp = oldRecords.get(key);
-            for(Funnel_Addition__c addition : currentFunnelAdditions.values()) {
-                if (addition.Opportunity__c == oldOpp.Id) {
-                    if (newRecords.containsKey(key)) {
-                        Opportunity newOpp = newRecords.get(key);
-                        if(newOpp.CloseDate != oldOpp.CloseDate) {
-                            if(AnnualTargetUtils.Utils.IsMovedOutOfCurrentPeriod(addition,newOpp,false)) {
-                                additionsToInsert.add(AnnualTargetUtils.Utils.CreateNewFunnelAddition(newOpp));
-                                AnnualTargetUtils.Utils.UpdateAmountForCurrentFunnelAddition(addition,oldOpp);
-                                additionsToUpdate.add(addition);
-                            }else {
-                                addition.Close_Date_at_End__c = newOpp.CloseDate;
-                                AnnualTargetUtils.Utils.UpdateAmountForCurrentFunnelAddition(addition, newOpp);
-                                additionsToUpdate.add(addition);
+            if(HasAccessToNewFeature(oldOpp.OwnerId)) {
+                for (Funnel_Addition__c addition : currentFunnelAdditions.values()) {
+                    if(Test.isRunningTest()) {
+                        System.debug('Test is Running');
+                    }
+                    Annual_Quota_Config__c quotaConfig = quotaSelector.GetOneBySeller(Id.valueOf(UserInfo.getUserId()))[0];
+                    AnnualTargetUtils.QuotaConfig = quotaConfig;
+                    AnnualTargetUtils.Period = AnnualTargetUtils.Utils.GetPeriodForOpp(oldOpp, false);
+                    if (addition.Opportunity__c == oldOpp.Id) {
+                        if (newRecords.containsKey(key)) {
+                            Opportunity newOpp = newRecords.get(key);
+                            if (newOpp.CloseDate != oldOpp.CloseDate) {
+                                if (AnnualTargetUtils.Utils.IsMovedOutOfCurrentPeriod(addition, newOpp, false)) {
+                                    additionsToInsert.add(AnnualTargetUtils.Utils.CreateNewFunnelAddition(newOpp));
+                                    AnnualTargetUtils.Utils.UpdateAmountForCurrentFunnelAddition(addition, oldOpp);
+                                    additionsToUpdate.add(addition);
+                                } else {
+                                    addition.Close_Date_at_End__c = newOpp.CloseDate;
+                                    AnnualTargetUtils.Utils.UpdateAmountForCurrentFunnelAddition(addition, newOpp);
+                                    additionsToUpdate.add(addition);
+                                }
+                            }
+                            if (addition.Current_Amount__c != newOpp.Amount) {
+                                addition.Current_Amount__c = newOpp.Amount;
                             }
                         }
-                        if (addition.Current_Amount__c != newOpp.Amount) {
-                            addition.Current_Amount__c = newOpp.Amount;
-                        }
                     }
+
                 }
             }
         }
+        System.debug(additionsToUpdate);
         Database.UpsertResult[] upsertResults = Database.upsert(additionsToUpdate, Funnel_Addition__c.Id, false);
         for(Database.UpsertResult result : upsertResults) {
             if(result.isSuccess()) { }else if(result.isCreated()) { }
@@ -61,7 +72,7 @@ public with sharing class OpportunityService {
             }
         }
 
-
+        System.debug(additionsToInsert);
         Database.SaveResult[] insertResults = Database.insert(additionsToInsert, false);
         for (Database.SaveResult result : insertResults) {
             if (result.isSuccess()) { }
@@ -75,6 +86,73 @@ public with sharing class OpportunityService {
 
     }
 
+    public void AfterUpdateActions(Map<Id, Opportunity> newRecords, Map<Id, Opportunity> oldRecords) {
+        List<Funnel_Addition__c> additionsToUpdate = new List<Funnel_Addition__c>();
+        List<Funnel_Addition__c> additionsToInsert = new List<Funnel_Addition__c>();
+        //FunnelAdditionSelector funnelAdditionSelector = new FunnelAdditionSelector();
+        //Map<Id, Funnel_Addition__c> currentFunnelAdditions = new Map<Id, Funnel_Addition__c>();
+        //currentFunnelAdditions.putAll(funnelAdditionSelector.GetAll());
+        //Map<String, String> iFunnelAdditionMap = new Map<String, String>();
+        AnnualQuotaSelector quotaSelector = new AnnualQuotaSelector();
+        Map<Id, Annual_Quota_Config__c> annualQuotaConfigMap = new Map<Id, Annual_Quota_Config__c>();
+        annualQuotaConfigMap.putAll(quotaSelector.GetAll());
+
+        Map<String, Object> returnData = new Map<String, Object>();
+        for(Id key : oldRecords.keySet()) {
+            Opportunity oldOpp = oldRecords.get(key);
+            if(HasAccessToNewFeature(oldOpp.OwnerId)) {
+                if (newRecords.containsKey(key)) {
+                    Opportunity newOpp = newRecords.get(key);
+                    String fy = String.valueOf(oldOpp.CloseDate.year());
+                    Annual_Quota_Config__c i_config = new Annual_Quota_Config__c();
+                    for(Annual_Quota_Config__c config : annualQuotaConfigMap.values()) {
+                        if(config.Rep__c == UserInfo.getUserId() ) { i_config = config; }
+                    }
+                    if(i_config == null) {
+                        Logger.Error('No Config found for You. Please Create Quota Configuration for ' + UserInfo.getUserName());
+                    }else {
+                        if(AnnualTargetUtils.Utils.IsThereExistingFunnelAddition(oldOpp)) {
+                            Funnel_Addition__c addition = AnnualTargetUtils.Utils.GetFunnelAddition(oldOpp);
+                            Map<String, Object> data = Logic(oldOpp, newOpp, addition);
+                            additionsToInsert.addAll((List<Funnel_Addition__c>) data.get('toInsert'));
+                            additionsToUpdate.addAll((List<Funnel_Addition__c>) data.get('toUpdate'));
+                        }else {
+                            Funnel_Addition__c addition = AnnualTargetUtils.Utils.CreateNewFunnelAddition(newOpp);
+                            Map<String, Object> data = Logic(oldOpp, newOpp, addition);
+                            additionsToInsert.addAll((List<Funnel_Addition__c>) data.get('toInsert'));
+                            additionsToUpdate.addAll((List<Funnel_Addition__c>) data.get('toUpdate'));
+                        }
+                    }
+
+                }
+            }
+        }
+        System.debug('Funnel Additions being updated ===> ' + additionsToUpdate);
+        Database.UpsertResult[] upsertResults = Database.upsert(additionsToUpdate, Funnel_Addition__c.Id, false);
+        for(Database.UpsertResult result : upsertResults) {
+            if(result.isSuccess()) { }else if(result.isCreated()) { }
+            else {
+                for (Database.Error error : result.getErrors()) {
+                    System.debug(error.getStatusCode() + ':' + error.getMessage());
+                }
+            }
+        }
+
+        System.debug('#### Funnel Additions being Created ==> ' + additionsToInsert);
+        Database.SaveResult[] insertResults = Database.insert(additionsToInsert, false);
+        for (Database.SaveResult result : insertResults) {
+            if (result.isSuccess()) { }
+            else {
+                for(Database.Error err : result.getErrors()) {
+                    //System.debug('Index of ' + insertResults.indexOf(result) + ' ' + 'Failed');
+                    System.debug(err.getStatusCode() + ': ' + err.getMessage());
+                }
+            }
+        }
+
+        Logger.CommitLogs();
+    }
+
     private List<SObjectType> OppServUnitOfWork() {
         return new List<SObjectType> {
                 Opportunity.SObjectType,
@@ -84,4 +162,51 @@ public with sharing class OpportunityService {
                 Funnel_Addition_Target__c.SObjectType
         };
     }
+
+    private Boolean HasAccessToNewFeature(Id key) {
+        UserSelector selector = new UserSelector();
+        User u = (User) selector.GetQueryFactory().WithCriteria(Criteria.Equals(User.Id, key)).Execute()[0];
+
+        Boolean accessBool;
+        Set < Id > permissionSetIds = new Set < Id >();
+        List < User > userList = new List < User >();
+        for ( SetupEntityAccess access : [ SELECT ParentId FROM SetupEntityAccess
+        WHERE SetupEntityId IN ( SELECT Id
+        FROM CustomPermission
+        WHERE DeveloperName = 'Use_New_FAT_Functionality' )
+        ] )
+            permissionSetIds.add(access.ParentId);
+
+        userList = [ SELECT Username FROM User WHERE Id IN (
+                SELECT AssigneeId FROM PermissionSetAssignment
+                WHERE PermissionSetId IN :permissionSetIds AND AssigneeId =: u.Id ) ];
+        accessBool = userList.isEmpty() ? false : true;
+        return accessBool;
+    }
+
+    private Map<String, Object> Logic(Opportunity oldOpp, Opportunity newOpp, Funnel_Addition__c addition) {
+        Map<String, Object> returnData = new Map<String, Object>();
+        List<Funnel_Addition__c> additionsToInsert = new List<Funnel_Addition__c>();
+        List<Funnel_Addition__c> additionsToUpdate = new List<Funnel_Addition__c>();
+        if (newOpp.CloseDate != oldOpp.CloseDate) {
+            if (AnnualTargetUtils.Utils.IsMovedOutOfCurrentPeriod(addition, newOpp, false)) {
+                additionsToInsert.add(AnnualTargetUtils.Utils.CreateNewFunnelAddition(newOpp));
+                AnnualTargetUtils.Utils.UpdateAmountForCurrentFunnelAddition(addition, oldOpp);
+                additionsToUpdate.add(addition);
+            } else {
+                addition.Close_Date_at_End__c = newOpp.CloseDate;
+                AnnualTargetUtils.Utils.UpdateAmountForCurrentFunnelAddition(addition, newOpp);
+                additionsToUpdate.add(addition);
+            }
+        }
+        if (addition.Current_Amount__c != newOpp.Amount) {
+            addition.Current_Amount__c = newOpp.Amount;
+        }
+
+        returnData.put('toInsert', additionsToInsert);
+        returnData.put('toUpdate',  additionsToUpdate);
+        return  returnData;
+    }
+
+
 }

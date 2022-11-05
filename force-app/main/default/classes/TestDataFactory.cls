@@ -317,6 +317,33 @@ public with sharing class TestDataFactory {
         return userA;
     }
 
+    public void CreateTestAnnualConfigurations() {
+        User u = [SELECT Id FROM User WHERE LastName Like 'lastName%' LIMIT 1];
+
+        Annual_Funnel_Addition_Target_Config__c annualConfig = new Annual_Funnel_Addition_Target_Config__c();
+        annualConfig.Label__c = 'Test Annual Config';
+        annualConfig.Territory__c = 'North East';
+        annualConfig.Target__c = 5100000;
+        annualConfig.IsActive__c = true;
+
+        insert annualConfig;
+        Annual_Quota_Config__c quotaConfig = new Annual_Quota_Config__c();
+        quotaConfig.Name__c = 'Test Quota Config';
+        quotaConfig.Rep__c = u.id;
+        quotaConfig.IsSeller__c = true;
+        quotaConfig.Territory__c = annualConfig.Territory__c;
+
+        insert quotaConfig;
+
+        Funnel_Addition_Target__c target = new Funnel_Addition_Target__c();
+        target.Territory__c = annualConfig.Territory__c;
+        target.Period__c = 'P1';
+        target.Fiscal_Year__c = String.valueOf(Date.today().year());
+        target.Quote_Config__c = quotaConfig.Id;
+         insert target;
+
+    }
+
     private static User createUser(String firstName, String lastName, UserRole role, Profile pf) {
         String emailAddress = firstName+'.'+lastName+'.'+role.Name.replace(' ', '') + '@usp.com.unittest';
         return new User(

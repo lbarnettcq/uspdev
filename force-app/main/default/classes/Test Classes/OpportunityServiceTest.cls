@@ -14,7 +14,7 @@ private class OpportunityServiceTest {
     @TestSetup
     static void Setup() {
         TestDataFactory.insertUsers(true);
-        TestDataFactory.insertOpportunity();
+        //TestDataFactory.insertOpportunity();
     }
 
     @IsTest
@@ -25,12 +25,19 @@ private class OpportunityServiceTest {
         OpportunitySelector oppSelector = new OpportunitySelector();
         FunnelAdditionSelector funnelAdditionSelector = new FunnelAdditionSelector();
         User u = [SELECT Id FROM User WHERE LastName Like 'lastName%' LIMIT 1];
+        List<User> uLst = new List<User>();
+        uLst.add(u);
+        TestDataFactory.assignNewFATFunctionality(uLst);
+        TestDataFactory.insertOpportunity();
+        Opportunity opp = oppSelector.GetOne()[0];
+        opp.CloseDate = opp.CloseDate.addDays(180);
+        update opp;
+        List<Funnel_Addition__c> additions = funnelAdditionSelector.GetAll();
+        System.assertNotEquals(additions, null);
+        System.debug('### Created Funnel Additions ===> ' + additions.size());
         Test.startTest();
         System.runAs(u) {
-            Opportunity opp = oppSelector.GetOne()[0];
-            List<Funnel_Addition__c> additions = funnelAdditionSelector.GetAll();
-            System.assertNotEquals(additions, null);
-            System.debug(additions);
+
         }
 
     }

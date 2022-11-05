@@ -27,10 +27,12 @@ public with sharing class AnnualQuotaConfigTriggerHandler {
         List<Annual_Quota_Config__c> quotaConfigs = Trigger.new;
         AnnualTargetSelector iSelector = new AnnualTargetSelector();
         for(Annual_Quota_Config__c mConfig : quotaConfigs) {
-            Annual_Funnel_Addition_Target_Config__c pConfig = iSelector.GetById(new Set<Id>{ mConfig
-                    .Annual_Funnel_Addition_Target_Config__c})[0];
-            mConfig.AnnualTarget__c = pConfig.Target__c;
-            mConfig.Period_Target__c = pConfig.Target__c/12;
+            Annual_Funnel_Addition_Target_Config__c pConfig = iSelector.GetById(new Set<Id>{ mConfig.Annual_Funnel_Addition_Target_Config__c})[0];
+            if(pConfig != null) {
+                mConfig.AnnualTarget__c = pConfig.Target__c;
+                mConfig.Period_Target__c = pConfig.Target__c/12;
+            }
+
         }
     }
 
@@ -38,10 +40,12 @@ public with sharing class AnnualQuotaConfigTriggerHandler {
         List<Annual_Quota_Config__c> quotaConfigs = Trigger.new;
         AnnualTargetSelector iSelector = new AnnualTargetSelector();
         for(Annual_Quota_Config__c mConfig : quotaConfigs) {
-            Annual_Funnel_Addition_Target_Config__c pConfig = iSelector.GetById(new Set<Id>{ mConfig
-                    .Annual_Funnel_Addition_Target_Config__c})[0];
-            mConfig.AnnualTarget__c = pConfig.Target__c;
-            mConfig.Period_Target__c = pConfig.Target__c/12;
+            Annual_Funnel_Addition_Target_Config__c pConfig = iSelector.GetById(new Set<Id>{ mConfig.Annual_Funnel_Addition_Target_Config__c})[0];
+            if(pConfig != null) {
+                mConfig.AnnualTarget__c = pConfig.Target__c;
+                mConfig.Period_Target__c = pConfig.Target__c/12;
+            }
+
         }
     }
 

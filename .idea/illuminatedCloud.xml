@@ -4,9 +4,9 @@
     <option name="connections">
       <list>
         <IlluminatedCloudConnection>
-          <option name="connectionName" value="uspdev" />
+          <option name="connectionName" value="uspDev" />
           <option name="connectionType" value="OAUTH" />
-          <option name="defaultModuleName" value=".idea" />
+          <option name="defaultModuleName" value="uspdev" />
           <option name="offlineSymbolTablePath" value="$PROJECT_DIR$/IlluminatedCloud/uspdev/OfflineSymbolTable.zip" />
         </IlluminatedCloudConnection>
       </list>

@@ -12,16 +12,15 @@ public without sharing class OpportunityTriggerHandler {
 
         if (Trigger.isAfter) {
             afterInsertUpdate();
+            if(Trigger.isUpdate) {
+                afterUpdate();
+            }
         }
     }
 
     private static void beforeInsertUpdate() {
-        String key = UserInfo.getUserId();
-        Set<Id> keyset = new Set<Id>();
-        keyset.add(Id.valueOf(key));
-        UserSelector selector = new UserSelector();
         if(SecurityHandler.App.HasAccessToFeature('Use_New_FAT_Functionality')) {
-            System.debug('#### Using New FAT Functionality');
+            //System.debug('#### Using New FAT Functionality');
         }
 
 
@@ -82,6 +81,15 @@ public without sharing class OpportunityTriggerHandler {
             if (ufats != null && !ufats.isEmpty()) { fats.addAll(ufats); }
         }
         if (fats != null && !fats.isEmpty()) { update fats; }
+    }
+
+    private static void afterUpdate() {
+        if(SecurityHandler.App.HasAccessToFeature('Use_New_FAT_Functionality')) {
+            System.debug('#### Using New FAT Functionality');
+            Map<Id, Opportunity> oldRecords = (Map<Id, Opportunity>) Trigger.oldMap;
+            Map<Id, Opportunity> newRecords = (Map<Id, Opportunity>) Trigger.newMap;
+            OpportunityService.Actions.AfterUpdateActions(newRecords, oldRecords);
+        }
     }
 
     private static List<FunnelAdditionTarget__c> calculateFATPeriodFunnel(Id seller, List<Period> periods

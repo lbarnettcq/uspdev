@@ -162,11 +162,15 @@
     <label>Annual Funnel Addition Target Config</label>
     <nameField>
         <displayFormat>FATC-{00000}</displayFormat>
-        <label>Annual Funnel Addition Target Config Name</label>
+        <label>Annual Funnel Addition Target Config Nam</label>
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Annual Funnel Addition Target Configs</pluralLabel>
-    <searchLayouts></searchLayouts>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Territory__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Label__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IsActive__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

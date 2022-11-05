@@ -23,7 +23,10 @@ public with sharing class AnnualQuotaSelector extends SObjectSelector {
                 Annual_Quota_Config__c.CreatedById,
                 Annual_Quota_Config__c.CreatedDate,
                 Annual_Quota_Config__c.LastModifiedById,
-                Annual_Quota_Config__c.LastModifiedDate
+                Annual_Quota_Config__c.LastModifiedDate ,
+                Annual_Quota_Config__c.Fiscal_Year__c,
+                Annual_Quota_Config__c.Territory__c,
+                Annual_Quota_Config__c.UseCustomPeriod__c
         };
     }
 
@@ -45,5 +48,13 @@ public with sharing class AnnualQuotaSelector extends SObjectSelector {
 
     public List<Annual_Quota_Config__c> GetBySeller(Set<Id> idset) {
         return GetQueryFactory().WithCriteria(Criteria.ValueIn(Annual_Quota_Config__c.Rep__c, idset)).Execute();
+    }
+
+    public List<Annual_Quota_Config__c> GetOneBySeller(Id key) {
+        return GetQueryFactory().WithCriteria(Criteria.Equals(Annual_Quota_Config__c.Rep__c, key)).Execute();
+    }
+
+    public List<Annual_Quota_Config__c> GetByTargetConfig(Id key){
+        return GetQueryFactory().WithCriteria(Criteria.Equals(Annual_Quota_Config__c.Annual_Funnel_Addition_Target_Config__c, key)).Execute();
     }
 }
