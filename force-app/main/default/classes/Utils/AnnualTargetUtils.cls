@@ -22,7 +22,7 @@ public with sharing class AnnualTargetUtils {
     }
 
     //private static Annual_Quota_Config__c m_quotaConfig;
-    public static Annual_Quota_Config__c QuotaConfig;
+    public static Annual_Quota_Config__c QuotaConfig = new Annual_Quota_Config__c();
 
     public Funnel_Addition__c CreateNewFunnelAddition(Opportunity opportunity) {
         FunnelAdditionTargetSelector sFunneladditiontargetselector = new FunnelAdditionTargetSelector();

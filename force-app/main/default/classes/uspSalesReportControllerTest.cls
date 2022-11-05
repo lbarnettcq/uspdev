@@ -2,7 +2,7 @@
 private class uspSalesReportControllerTest {
     @IsTest
     static void noSettingsTests() {
-        TestDataFactory.insertUsers();
+        TestDataFactory.insertUsers(false);
         TestDataFactory.insertQuotaAmount();
 
         User u = [SELECT  Id, Name, Alias FROM User WHERE LastName LIKE 'lastName%'];
