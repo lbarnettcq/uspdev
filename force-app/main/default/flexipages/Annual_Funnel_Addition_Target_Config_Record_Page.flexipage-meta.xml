@@ -130,13 +130,16 @@
                     <name>relatedListFieldAliases</name>
                     <valueList>
                         <valueListItems>
-                            <value>IsSeller__c</value>
-                        </valueListItems>
-                        <valueListItems>
                             <value>Rep__c</value>
                         </valueListItems>
                         <valueListItems>
                             <value>Period_Target__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Annual_Quote_Config_Name__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>NAME</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>

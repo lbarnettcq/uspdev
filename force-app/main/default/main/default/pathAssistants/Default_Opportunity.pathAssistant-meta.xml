@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Opportunity</entityName>
+    <fieldName>StageName</fieldName>
+    <masterLabel>Default</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Chemical_Global__c</fieldNames>
+        <fieldNames>LeadSource</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Actions&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;B - &lt;/b&gt;Ask about budget&lt;/p&gt;&lt;p&gt;&lt;b&gt;A - &lt;/b&gt;Identify stakeholder to determine level of complexity&lt;/p&gt;&lt;p&gt;&lt;b&gt;N - &lt;/b&gt;uncover plan, need and rough opportunity size&lt;/p&gt;&lt;p&gt;&lt;b&gt;T&lt;/b&gt; - Request approximate timing&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;&lt;u&gt;Stage Progression Criteria&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;B - &lt;/b&gt;General budget availability&lt;/p&gt;&lt;p&gt;&lt;b&gt;A - &lt;/b&gt;Email and/or Phone from primary contact&lt;/p&gt;&lt;p&gt;&lt;b&gt;N&lt;/b&gt; - Statement of need and rough estimate of the opportunity size&lt;/p&gt;&lt;p&gt;&lt;b&gt;T - &lt;/b&gt;Timing estimate&lt;/p&gt;</info>
+        <picklistValueName>0 - Target</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>CloseDate</fieldNames>
+        <fieldNames>ROI_Analysis_Completed__c</fieldNames>
+        <fieldNames>Drivers__c</fieldNames>
+        <fieldNames>Discovery_Completed__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;Actions&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;B &lt;/b&gt;- Ask about budget process&lt;/p&gt;&lt;p&gt;&lt;b&gt;A - &lt;/b&gt;set up meeting with stakeholder(s) including Technical buyer&lt;/p&gt;&lt;p&gt;&lt;b&gt;N - &lt;/b&gt;Consult with customer. Does the opportunity fit USP core served market?&lt;/p&gt;&lt;p&gt;&lt;b&gt;T &lt;/b&gt;- Request approximate timing&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Stage Progression Criteria&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;B &lt;/b&gt;- Full service model agreed by customer (non-capital)&lt;/p&gt;&lt;p&gt;&lt;b&gt;A &lt;/b&gt;- Milestone meeting; Stakeholder names provided; Technical Buyer identified&lt;/p&gt;&lt;p&gt;&lt;b&gt;N &lt;/b&gt;- Customer Application/ Specifications and clear definition of need&lt;/p&gt;&lt;p&gt;&lt;b&gt;T&lt;/b&gt; - Budget cycle identified; Purchase date (target year)&lt;/p&gt;</info>
+        <picklistValueName>1 - Prospect</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Comments__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;ACTIONS &lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;B &lt;/b&gt;- Confirm budget for USP core business, full service&lt;/p&gt;&lt;p&gt;&lt;b&gt;A &lt;/b&gt;- Offer survey if beneficial to quantify application&lt;/p&gt;&lt;p&gt;&lt;b&gt;N &lt;/b&gt;- Present and Value Sell solution, Identify Obstacles/Objections&lt;/p&gt;&lt;p&gt;&lt;b&gt;T &lt;/b&gt;- Request approximate timing&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;STAGE PROGRESSION CRITERIA&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;B &lt;/b&gt;- Budget agreement&lt;/p&gt;&lt;p&gt;&lt;b&gt;A&lt;/b&gt; - Economic Buyer (decision maker) identified&lt;/p&gt;&lt;p&gt;&lt;b&gt;N &lt;/b&gt;- Confirm customer agrees with our proposed solution&lt;/p&gt;&lt;p&gt;&lt;b&gt;T &lt;/b&gt;- Identify timing for technical presentation / survey date&lt;/p&gt;</info>
+        <picklistValueName>2 - Qualified</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Chemical_Global__c</fieldNames>
+        <fieldNames>Drivers__c</fieldNames>
+        <fieldNames>NEXT_STEP__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;ACTIONS&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;B &lt;/b&gt;- Reconfirm budget&lt;/p&gt;&lt;p&gt;&lt;b&gt;A &lt;/b&gt;- Confirm Economic Buyer; Identify internal Sponsor(s)&lt;/p&gt;&lt;p&gt;&lt;b&gt;N &lt;/b&gt;- Assess customer intent to accept USP&amp;#39;s solution / survey work&lt;/p&gt;&lt;p&gt;&lt;b&gt;T &lt;/b&gt;- Ask customer to specify purchase cycle timing&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;STAGE PROGRESSION CRITERIA&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;B &lt;/b&gt;- Confirm that customers ROI and budget requirements met&lt;/p&gt;&lt;p&gt;&lt;b&gt;A &lt;/b&gt;- Review survey work/Agree USP solution preferred&lt;/p&gt;&lt;p&gt;&lt;b&gt;N &lt;/b&gt;- Specific product /solution confirmed, Obstacles/Objections are cleared&lt;/p&gt;&lt;p&gt;&lt;b&gt;T &lt;/b&gt;- Timing to summit and review proposal of USP solution&lt;/p&gt;</info>
+        <picklistValueName>3 - Validated</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;ACTIONS&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;B&lt;/b&gt; - Confirm funds are committed&lt;/p&gt;&lt;p&gt;&lt;b&gt;A &lt;/b&gt;- Confirm no additional obstacles to purchase&lt;/p&gt;&lt;p&gt;&lt;b&gt;N &lt;/b&gt;- Key Opinion leaders, Technical and Economical buyers all verbally confirm USP solution is preferred&lt;/p&gt;&lt;p&gt;&lt;b&gt;T &lt;/b&gt;- Confirm process to issue POs and current PO status; Confirm commissioning date&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;STAGE PROGRESSION CRITERIA&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;B &lt;/b&gt;- Stakeholders committed to buy from USP&lt;/p&gt;&lt;p&gt;&lt;b&gt;A &lt;/b&gt;- TC&amp;#39;s confirmed, conditions to buy USP negotiated&lt;/p&gt;&lt;p&gt;&lt;b&gt;N &lt;/b&gt;- Confirm needs have not changed and prefer USP&lt;/p&gt;&lt;p&gt;&lt;b&gt;T &lt;/b&gt;- Approval to place order (target week)&lt;/p&gt;</info>
+        <picklistValueName>4 - Proposal</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Contract_PO_Start_Date__c</fieldNames>
+        <fieldNames>Contract_PO_Duration__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;ACTIONS&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;B&lt;/b&gt; - Confirm funds are released, verbal or email commitment of the order&lt;/p&gt;&lt;p&gt;&lt;b&gt;A &lt;/b&gt;- Ensure TC&amp;#39;s sign off, Reconfirm no additional obstacles to purchase&lt;/p&gt;&lt;p&gt;&lt;b&gt;N &lt;/b&gt;- Reconfirm needs have not changed&lt;/p&gt;&lt;p&gt;&lt;b&gt;T &lt;/b&gt;- Reconfirm specific timing for PO and commissioning&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;STAGE PROGRESSION CRITERIA&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Order Received and ready to book; USP BAAN created&lt;/b&gt;&lt;/p&gt;</info>
+        <picklistValueName>5 - Closed/Won</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Loss_Reason__c</fieldNames>
+        <info>&lt;strong&gt;Revise techniques to increase future wins.&lt;/strong&gt;
+
+&lt;ul&gt;&lt;li&gt;What contributed to losing this opportunity?&lt;/li&gt;&lt;li&gt;What do we need to do differently to improve our chances of winning?&lt;/li&gt;&lt;li&gt;Schedule a follow-up task or event for this account.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Closed Lost</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

@@ -38,6 +38,14 @@
                 <behavior>Edit</behavior>
                 <field>Territory__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Fiscal_Year__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>UseCustomPeriod__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -78,6 +86,10 @@
     <miniLayout>
         <fields>Name__c</fields>
     </miniLayout>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Funnel_Addition_Target__c.Quote_Config__c</relatedList>
+    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
