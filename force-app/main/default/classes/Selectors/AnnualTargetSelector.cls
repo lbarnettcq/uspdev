@@ -45,4 +45,8 @@ public with sharing class AnnualTargetSelector extends SObjectSelector {
     public  List<Annual_Funnel_Addition_Target_Config__c> GetByFiscalYear(String key) {
         return GetQueryFactory().WithCriteria(Criteria.Equals(Annual_Funnel_Addition_Target_Config__c.Fiscal_Year__c, key)).Execute();
     }
+
+    public List<Annual_Funnel_Addition_Target_Config__c> GetByLabel(String key) {
+        return GetQueryFactory().WithCriteria(Criteria.Equals(Annual_Funnel_Addition_Target_Config__c.Label__c, key)).Execute();
+    }
 }

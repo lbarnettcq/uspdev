@@ -12,6 +12,16 @@ public with sharing class DefaultPeriodSelector extends SObjectSelector{
         super(Period.SObjectType);
     }
 
+    private static DefaultPeriodSelector m_instance;
+    public static DefaultPeriodSelector Instance {
+        get {
+            if(m_instance != null) { return m_instance;}
+            m_instance = new DefaultPeriodSelector();
+            return m_instance;
+        }
+    }
+
+
 
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField>{
@@ -40,6 +50,12 @@ public with sharing class DefaultPeriodSelector extends SObjectSelector{
         List<Period> periods = [SELECT Id, FullyQualifiedLabel, StartDate, EndDate, Type,FiscalYearSettingsId,Number FROM
                 Period WHERE StartDate
                 <=: dateValue AND EndDate >=: dateValue AND Type = 'Month'];
+        return periods;
+    }
+
+    public List<Period> GetByFiscalYear(String key) {
+        List<Period> periods = [SELECT Id, FullyQualifiedLabel, StartDate, EndDate, Type, FiscalYearSettingsId,
+                Number FROM Period WHERE FiscalYearSettings.Name =: key AND Type = 'Month'];
         return periods;
     }
 }

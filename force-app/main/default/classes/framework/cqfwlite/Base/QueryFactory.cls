@@ -265,7 +265,7 @@ public inherited sharing class QueryFactory implements iQueryFactory{
         String soql = '';
         try {
             soql = GenerateSoql();
-            cq.App.Logger.Debug(LOG_PREFIX + 'Executing SOQL :: ' + soql);
+            //cq.App.Logger.Debug(LOG_PREFIX + 'Executing SOQL :: ' + soql);
             return (List<SObject>) Database.query(soql);
         } catch (Exception ex) {
             cq.App.Logger.Log(System.LoggingLevel.ERROR, LOG_PREFIX + 'Error Executing SOQL :: ' + soql);

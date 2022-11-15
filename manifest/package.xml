@@ -35,6 +35,7 @@
         <members>SecurityHandler</members>
         <members>OpportunityServiceTest</members>
         <members>OpportunitySelector</members>
+        <members>FunnelAdditionService</members>
         <name>ApexClass</name>
     </types>
     <types>

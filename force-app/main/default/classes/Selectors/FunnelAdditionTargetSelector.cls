@@ -12,6 +12,16 @@ public with sharing class FunnelAdditionTargetSelector extends SObjectSelector{
         super(Funnel_Addition_Target__c.SObjectType);
     }
 
+    private static FunnelAdditionTargetSelector m_instance;
+    public static FunnelAdditionTargetSelector Instance {
+        get {
+            if(m_instance != null) { return m_instance; }
+            System.debug('##New Funnel Addition Selector Instance Create');
+            m_instance = new FunnelAdditionTargetSelector();
+            return m_instance;
+        }
+    }
+
 
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField>{

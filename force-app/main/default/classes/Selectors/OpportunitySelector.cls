@@ -11,6 +11,15 @@ public with sharing class OpportunitySelector extends SObjectSelector {
         super(Opportunity.SObjectType);
     }
 
+    private static OpportunitySelector m_instance;
+    public static OpportunitySelector Instance {
+        get {
+            if(m_instance != null) { return m_instance;}
+            m_instance = new OpportunitySelector();
+            return m_instance;
+        }
+    }
+
     public override Set<SObjectField> GetDefaultFields(){
         return new Set<SObjectField>{
                 Opportunity.Id,

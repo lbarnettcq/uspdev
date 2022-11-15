@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="IlluminatedCloud" name="Illuminated Cloud">
       <configuration>
-        <option name="connectionName" value="uspDev" />
+        <option name="connectionName" value="uspdev" />
         <option name="connectionType" value="OAUTH" />
         <option name="moduleContents">
           <ModuleContents>
@@ -16,8 +16,12 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="IlluminatedCloud (uspdev/uspDev)" jdkType="IlluminatedCloud" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/force-app/main/default" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/.sfdx" />
+      <excludeFolder url="file://$MODULE_DIR$/.sf" />
+    </content>
+    <orderEntry type="jdk" jdkName="IlluminatedCloud (uspdev/uspdev)" jdkType="IlluminatedCloud" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

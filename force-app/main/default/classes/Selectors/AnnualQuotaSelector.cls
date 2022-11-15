@@ -11,6 +11,15 @@ public with sharing class AnnualQuotaSelector extends SObjectSelector {
         super(Annual_Quota_Config__c.SObjectType);
     }
 
+    private static AnnualQuotaSelector m_instance;
+    public static AnnualQuotaSelector Instance{
+        get {
+            if(m_instance != null){ return m_instance;}
+            m_instance = new AnnualQuotaSelector();
+            return m_instance;
+        }
+    }
+
 
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField> {
@@ -26,7 +35,8 @@ public with sharing class AnnualQuotaSelector extends SObjectSelector {
                 Annual_Quota_Config__c.LastModifiedDate ,
                 Annual_Quota_Config__c.Fiscal_Year__c,
                 Annual_Quota_Config__c.Territory__c,
-                Annual_Quota_Config__c.UseCustomPeriod__c
+                Annual_Quota_Config__c.UseCustomPeriod__c,
+                Annual_Quota_Config__c.Name__c
         };
     }
 
@@ -56,5 +66,13 @@ public with sharing class AnnualQuotaSelector extends SObjectSelector {
 
     public List<Annual_Quota_Config__c> GetByTargetConfig(Id key){
         return GetQueryFactory().WithCriteria(Criteria.Equals(Annual_Quota_Config__c.Annual_Funnel_Addition_Target_Config__c, key)).Execute();
+    }
+
+    public List<Annual_Quota_Config__c> GetByLabel(String key) {
+        return GetQueryFactory().WithCriteria(Criteria.Equals(Annual_Quota_Config__c.Name__c, key)).Execute();
+    }
+
+    public List<Annual_Quota_Config__c> GetByFiscalYear(String key) {
+        return GetQueryFactory().WithCriteria(Criteria.Equals(Annual_Quota_Config__c.Fiscal_Year__c, key)).Execute();
     }
 }

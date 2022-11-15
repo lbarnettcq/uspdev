@@ -12,6 +12,16 @@ public with sharing class FunnelAdditionSelector extends SObjectSelector {
         super(Funnel_Addition__c.SObjectType);
     }
 
+    private static FunnelAdditionSelector m_instance;
+    public static FunnelAdditionSelector Instance {
+        get {
+            if(m_instance != null) { return m_instance; }
+            System.debug('##New Funnel Addition Selector Instance Create');
+            m_instance = new FunnelAdditionSelector();
+            return m_instance;
+        }
+    }
+
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField>{
                 Funnel_Addition__c.Id,
@@ -39,8 +49,11 @@ public with sharing class FunnelAdditionSelector extends SObjectSelector {
     }
 
     public List<Funnel_Addition__c> GetByOpportunity(Id key) {
-        List<Funnel_Addition__c> targets = GetQueryFactory().WithCriteria(Criteria.Equals(Funnel_Addition__c.Opportunity__c, key)).Execute();
-        return targets;
+        return GetQueryFactory().WithCriteria(Criteria.Equals(Funnel_Addition__c.Opportunity__c, key)).Execute();
+    }
+
+    public List<Funnel_Addition__c> GetByOpportunities(Set<Id> keyset) {
+        return GetQueryFactory().WithCriteria(Criteria.ValueIn(Funnel_Addition__c.Opportunity__c, keyset)).Execute();
     }
 
     public List<Funnel_Addition__c> GeyByOpportunity(Set<Id> keyset) {

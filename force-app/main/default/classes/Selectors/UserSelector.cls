@@ -11,6 +11,15 @@ public with sharing class UserSelector extends SObjectSelector {
     public UserSelector(){
         super(User.SObjectType);
     }
+    private static UserSelector m_instance;
+    public static UserSelector Instance {
+        get {
+            if(m_instance != null) {return m_instance;}
+            m_instance = new UserSelector();
+            return m_instance;
+        }
+    }
+
 
 
     public override Set<SObjectField> GetDefaultFields() {
