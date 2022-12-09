@@ -52,7 +52,6 @@ public with sharing class FunnelAdditionService {
                     for(Id k : periodMap.keySet()) {
                         Period p = periodMap.get(k);
                         if(p.StartDate <= o.CloseDate && p.EndDate >= o.CloseDate) {
-                            System.debug(p);
                             prd = 'P' + p.Number;
                         }
                     }

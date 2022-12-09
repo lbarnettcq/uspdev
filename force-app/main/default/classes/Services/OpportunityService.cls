@@ -193,38 +193,7 @@ public with sharing class OpportunityService {
         Logger.CommitLogs();
     }
 
-    private List<SObjectType> OppServUnitOfWork() {
-        return new List<SObjectType> {
-                Opportunity.SObjectType,
-                Funnel_Addition__c.SObjectType,
-                Annual_Funnel_Addition_Target_Config__c.SObjectType,
-                Annual_Quota_Config__c.SObjectType,
-                Funnel_Addition_Target__c.SObjectType
-        };
-    }
 
-    private Boolean HasAccessToNewFeature(Id key) {
-        UserSelector selector = new UserSelector();
-        User u = (User) selector.GetQueryFactory().WithCriteria(Criteria.Equals(User.Id, key)).Execute()[0];
-
-        Boolean accessBool;
-        Set < Id > permissionSetIds = new Set < Id >();
-        List < User > userList = new List < User >();
-        for ( SetupEntityAccess access : [ SELECT ParentId
-                                            FROM SetupEntityAccess
-                                            WHERE SetupEntityId IN
-                                                ( SELECT Id
-                                                    FROM CustomPermission
-                                                    WHERE DeveloperName = 'Use_New_FAT_Functionality' )
-        ] )
-            permissionSetIds.add(access.ParentId);
-
-        userList = [ SELECT Username FROM User WHERE Id IN (
-                SELECT AssigneeId FROM PermissionSetAssignment
-                WHERE PermissionSetId IN :permissionSetIds AND AssigneeId =: u.Id ) ];
-        accessBool = userList.isEmpty() ? false : true;
-        return accessBool;
-    }
 
     private Map<String, Object> Logic(Opportunity oldOpp, Opportunity newOpp, Funnel_Addition__c addition) {
         Map<String, Object> returnData = new Map<String, Object>();

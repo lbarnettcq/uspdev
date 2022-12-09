@@ -12,7 +12,11 @@ public with sharing class AnnualQuotaConfigTriggerHandler {
         if(Trigger.isExecuting) {
             if(Trigger.isBefore){
                 if(Trigger.isInsert) {
-                    beforeInsertActions();
+                    if(Trigger.isBefore) {
+                        beforeInsertActions();
+                    }else{
+                        afterInsertActions();
+                    }
                 }else if(Trigger.isUpdate) {
                     beforeUpdateActions();
                 }else if(Trigger.isDelete) {
@@ -34,6 +38,13 @@ public with sharing class AnnualQuotaConfigTriggerHandler {
             }
 
         }
+    }
+
+    private static void afterInsertActions() {
+        if(AnnualTargetUtils.Utils.HasAccessToNewFeature(UserInfo.getUserId())) {
+            AnnualQuotaService.Action.afterInsertHandler((Map<Id, Annual_Quota_Config__c>) Trigger.newMap);
+        }
+
     }
 
     private static void beforeUpdateActions() {

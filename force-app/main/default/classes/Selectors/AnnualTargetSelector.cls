@@ -12,6 +12,15 @@ public with sharing class AnnualTargetSelector extends SObjectSelector {
         super(Annual_Funnel_Addition_Target_Config__c.SObjectType);
     }
 
+    private static AnnualTargetSelector m_Instance;
+    public static AnnualTargetSelector Instance {
+        get {
+            if(m_Instance != null) { return m_Instance; }
+            m_Instance = new AnnualTargetSelector();
+            return m_Instance;
+        }
+    }
+
 
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField>{

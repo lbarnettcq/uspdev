@@ -138,6 +138,8 @@ public with sharing class AnnualTargetUtils {
 
     public static TargetUtil DataUtil = new TargetUtil();
 
+    public static Map<Period, List<Period>> PeriodMapByFY = new Map<Period, List<Period>>();
+
     public static void UseCustomPeriod(){
         OverridePeriod = true;
     }
@@ -147,6 +149,7 @@ public with sharing class AnnualTargetUtils {
         CheckForExistingAdditions(opps);
         ParseAccessForCurrentOppOwners(opps);
         DataUtil.Init(opps, false);
+        ConfigPeriodMapping();
     }
 
     public static void CommitUtilLogs(){
@@ -168,8 +171,14 @@ public with sharing class AnnualTargetUtils {
     public static Annual_Quota_Config__c QuotaConfig = new Annual_Quota_Config__c();
 
     public Funnel_Addition__c CreateNewFunnelAddition(Opportunity opportunity, Boolean createNewOppData) {
+        List<Period> periodData = new List<Period>();
+        for(Period p : PeriodMapByFY.keySet()) {
+            if(opportunity.CloseDate.year() == p.StartDate.year()) {
+                periodData = PeriodMapByFY.get(p);
+            }
+        }
         Integer var = DataUtil.OppPeriodData.size() - 1;
-        FunnelAdditionTargetSelector sFunneladditiontargetselector = new FunnelAdditionTargetSelector();
+        //FunnelAdditionTargetSelector sFunneladditiontargetselector = new FunnelAdditionTargetSelector();
         Funnel_Addition__c iAddition = new Funnel_Addition__c();
         iAddition.Amount_at_Start__c = opportunity.Amount;
         iAddition.Close_Date_at_Start__c = opportunity.CloseDate;
@@ -194,9 +203,12 @@ public with sharing class AnnualTargetUtils {
         }
 
         if(!createNewOppData) {
-            for(OppPeriod op : DataUtil.OppPeriodData ) {
-                if(op.Opp.Id.equals(opportunity.Id)) {
-                    iAddition.Period__c = op.CurrentPeriod;
+            Map<Id, Period> pMap = new Map<Id,Period>(periodData);
+            for(Id key : pMap.keySet()){
+                Period p = pMap.get(key);
+                if(p.StartDate <= iAddition.Close_Date_at_Start__c && p.EndDate >= iAddition.Close_Date_at_Start__c) {
+                    System.debug(p);
+                    iAddition.Period__c = 'P' + p.Number;
                 }
             }
         }else {
@@ -206,7 +218,14 @@ public with sharing class AnnualTargetUtils {
             op.CreateIndex(var);
             DataUtil.OppPeriodData.add(op);
             SetStartOfPeriodForAddition(iAddition);
-            iAddition.Period__c = op.CurrentPeriod;
+            Map<Id, Period> pMap = new Map<Id,Period>(periodData);
+            for(Id key : pMap.keySet()){
+                Period p = pMap.get(key);
+                if(p.StartDate <= iAddition.Close_Date_at_Start__c && p.EndDate >= iAddition.Close_Date_at_Start__c) {
+                    System.debug(p);
+                    iAddition.Period__c = 'P' + p.Number;
+                }
+            }
 
         }
 
@@ -344,6 +363,33 @@ public with sharing class AnnualTargetUtils {
         }
         return value;
     }
+
+    private static void ConfigPeriodMapping() {
+        Map<Period, List<Period>> i_MappingPeriods = new Map<Period, List<Period>>();
+        List<Period> allPeriods = DefaultPeriodSelector.Instance.queryAll();
+        Map<String, Period> fyPeriods = new Map<String, Period>();
+        for(Period p : allPeriods) {
+            if(p.Type == 'Year') {
+                fyPeriods.put(String.valueOf(p.StartDate.year()), p);
+            }
+        }
+
+        for(String fiscalyear : fyPeriods.keySet()) {
+            List<Period> values = new List<Period>();
+            for(Period p : allPeriods) {
+                Period keyval = fyPeriods.get(fiscalyear);
+                if(p.StartDate.year() == keyval.StartDate.year()){
+                    if(p.Type == 'Month') { values.add(p); }
+                }
+            }
+            i_MappingPeriods.put(fyPeriods.get(fiscalyear), values);
+        }
+        PeriodMapByFY = i_MappingPeriods;
+
+
+    }
+
+
 
 
 

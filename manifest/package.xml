@@ -36,6 +36,12 @@
         <members>OpportunityServiceTest</members>
         <members>OpportunitySelector</members>
         <members>FunnelAdditionService</members>
+        <members>AnnualQuotaSelectorTest</members>
+        <members>AnnualQuotaService</members>
+        <members>FunnelAdditionTargetService</members>
+        <members>FunnelAdditionTargetTriggerHandler</members>
+        <members>BulkDeleteOrderProducts</members>
+        <members>BulkDeleteUtil</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -47,6 +53,7 @@
         <members>OpportunityTrigger</members>
         <members>AnnualTargetConfigTrigger</members>
         <members>AnnualQuotaConfidTrigger</members>
+        <members>FunnelAdditionTargetTrigger</members>
         <name>ApexTrigger</name>
     </types>
     <types>
