@@ -154,13 +154,13 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>FunnelAdditionTarget</label>
+    <label>FunnelAdditionTarget-Legacy</label>
     <nameField>
         <displayFormat>FAC-{000000}</displayFormat>
         <label>Funnel Addition Calculation</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>FunnelAdditionTargets</pluralLabel>
+    <pluralLabel>FunnelAdditionTargets-Legacy</pluralLabel>
     <searchLayouts></searchLayouts>
     <sharingModel>Read</sharingModel>
     <visibility>Public</visibility>

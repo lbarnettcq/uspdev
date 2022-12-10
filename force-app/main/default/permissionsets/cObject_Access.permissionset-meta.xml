@@ -230,11 +230,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Invoice__c.ExternalID__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Invoice__c.Invoice_Action_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -426,11 +421,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Order_Product__c.TotalPrice__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Order_Product__c.UniqueOrderProductID__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

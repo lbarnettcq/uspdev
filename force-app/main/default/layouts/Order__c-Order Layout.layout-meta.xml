@@ -151,7 +151,7 @@
                 <field>DANAHERPERIODENDDATE__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>External_ID__c</field>
             </layoutItems>
             <layoutItems>
