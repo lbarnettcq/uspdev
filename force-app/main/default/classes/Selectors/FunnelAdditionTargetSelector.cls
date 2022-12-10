@@ -16,7 +16,7 @@ public with sharing class FunnelAdditionTargetSelector extends SObjectSelector{
     public static FunnelAdditionTargetSelector Instance {
         get {
             if(m_instance != null) { return m_instance; }
-            System.debug('##New Funnel Addition Selector Instance Create');
+            System.debug('##New Funnel Addition Target Selector Instance Create');
             m_instance = new FunnelAdditionTargetSelector();
             return m_instance;
         }
@@ -32,7 +32,8 @@ public with sharing class FunnelAdditionTargetSelector extends SObjectSelector{
                 Funnel_Addition_Target__c.Territory__c,
                 Funnel_Addition_Target__c.Amount_at_Start__c,
                 Funnel_Addition_Target__c.Current_Amount__c,
-                Funnel_Addition_Target__c.Quote_Config__c
+                Funnel_Addition_Target__c.Quote_Config__c,
+                Funnel_Addition_Target__c.Rep__c
         };
     }
 

@@ -31,7 +31,7 @@ public without sharing class OpportunityTriggerHandler {
         Map<Id, Opportunity> newRecords = (Map<Id, Opportunity>) Trigger.newMap;
         Map<Id, Opportunity> oldRecords = Trigger.isInsert ? new Map<Id, Opportunity>() : (Map<Id, Opportunity>) Trigger.oldMap;
         if(SecurityHandler.App.HasAccessToFeature('Use_New_FAT_Functionality')) {
-            System.debug('#### Using New FAT Functionality AFTER INSERT UPDATE');
+            System.debug('#### Using New FAT Functionality AFTER INSERT');
             OpportunityService.Actions.AfterInsertServices(newRecords, oldRecords);
         }else
         {

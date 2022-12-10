@@ -122,7 +122,7 @@ public with sharing class TestDataFactory {
         Account account = [SELECT Id FROM Account WHERE Name Like 'Test%' LIMIT 1];
 
         for (Integer i = 0; i < opportunityCount; i++) {
-            String name = String.valueOf(opportunityPattern.get('name') + '_' + i);
+            String name = String.valueOf(opportunityPattern.get('Name') + '_' + i);
 
             //User user = [SELECT Id FROM User WHERE LastName Like 'lastName%' LIMIT 1];
 
@@ -238,8 +238,8 @@ public with sharing class TestDataFactory {
     }
 
     public static void loadFATConfiguration() {
-        Annual_Funnel_Addition_Target_Config__c config = new Annual_Funnel_Addition_Target_Config__c(
-                Label__c = 'Test Config',
+        Annual_Funnel_Addition_Target_Config__c config1 = new Annual_Funnel_Addition_Target_Config__c(
+                Label__c = 'Test Config 1',
                 UseCustomPeriod__c = false,
                 Territory_Manager__c = TestDataFactory.RunningUser.Id,
                 Fiscal_Year__c = String.valueOf(Date.today().year()),
@@ -247,13 +247,22 @@ public with sharing class TestDataFactory {
                 Target__c = 3500000,
                 IsActive__c = true
         );
-        insert config;
+        Annual_Funnel_Addition_Target_Config__c config2 = new Annual_Funnel_Addition_Target_Config__c(
+                Label__c = 'Test Config 2',
+                UseCustomPeriod__c = false,
+                Territory_Manager__c = TestDataFactory.RunningUser.Id,
+                Fiscal_Year__c = String.valueOf(Date.today().year() + 1),
+                Territory__c = 'North East',
+                Target__c = 3500000,
+                IsActive__c = true
+        );
+        insert new List<Annual_Funnel_Addition_Target_Config__c>{config1, config2};
     }
 
     public static void loadTestQuotaConfig() {
         AnnualTargetSelector tselector = new AnnualTargetSelector();
-        Annual_Quota_Config__c config = new Annual_Quota_Config__c(
-                Name__c = 'Test Config',
+        Annual_Quota_Config__c config1 = new Annual_Quota_Config__c(
+                Name__c = 'Test Config 1',
                 IsSeller__c = true,
                 Rep__c = TestDataFactory.RunningUser.Id,
                 Territory__c = 'North East',
@@ -261,14 +270,26 @@ public with sharing class TestDataFactory {
                 Fiscal_Year__c = String.valueOf(Date.today().year()),
                 AnnualTarget__c = 3500000,
                 Period_Target__c = 291666.67,
-                Annual_Funnel_Addition_Target_Config__c = tselector.GetByLabel('Test Config')[0].Id
+                Annual_Funnel_Addition_Target_Config__c = tselector.GetByLabel('Test Config 1')[0].Id
         );
-        insert config;
+
+        Annual_Quota_Config__c config2 = new Annual_Quota_Config__c(
+                Name__c = 'Test Config 2',
+                IsSeller__c = true,
+                Rep__c = TestDataFactory.RunningUser.Id,
+                Territory__c = 'North East',
+                UseCustomPeriod__c = false,
+                Fiscal_Year__c = String.valueOf(Date.today().year()),
+                AnnualTarget__c = 3500000,
+                Period_Target__c = 291666.67,
+                Annual_Funnel_Addition_Target_Config__c = tselector.GetByLabel('Test Config 2')[0].Id
+        );
+        insert new List<Annual_Quota_Config__c>{config1, config2};
     }
 
     public static void loadTestFunnelAdditionTarget() {
         AnnualQuotaSelector selector = new AnnualQuotaSelector();
-        Annual_Quota_Config__c quotaConfig = selector.GetByLabel('Test Config')[0];
+        Annual_Quota_Config__c quotaConfig = selector.GetByLabel('Test Config 1')[0];
         Funnel_Addition_Target__c target = new Funnel_Addition_Target__c(
                 Quote_Config__c = quotaConfig.Id,
                 Fiscal_Year__c = quotaConfig.Fiscal_Year__c,

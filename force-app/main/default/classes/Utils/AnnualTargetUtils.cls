@@ -126,7 +126,7 @@ public with sharing class AnnualTargetUtils {
                     for(Id key : pMap.keySet()){
                         Period p = pMap.get(key);
                         if(p.StartDate <= addition.Close_Date_at_Start__c && p.EndDate >= addition.Close_Date_at_Start__c) {
-                            System.debug(p);
+                            //System.debug(p);
                             op.StartPeriod = 'P' + p.Number;
                         }
                     }
@@ -170,7 +170,8 @@ public with sharing class AnnualTargetUtils {
     */
     public static Annual_Quota_Config__c QuotaConfig = new Annual_Quota_Config__c();
 
-    public Funnel_Addition__c CreateNewFunnelAddition(Opportunity opportunity, Boolean createNewOppData) {
+    public Funnel_Addition__c CreateNewFunnelAddition(Opportunity opportunity, Boolean createNewOppData, UnitOfWork
+            uow) {
         List<Period> periodData = new List<Period>();
         for(Period p : PeriodMapByFY.keySet()) {
             if(opportunity.CloseDate.year() == p.StartDate.year()) {
@@ -178,15 +179,13 @@ public with sharing class AnnualTargetUtils {
             }
         }
         Integer var = DataUtil.OppPeriodData.size() - 1;
-        //FunnelAdditionTargetSelector sFunneladditiontargetselector = new FunnelAdditionTargetSelector();
         Funnel_Addition__c iAddition = new Funnel_Addition__c();
         iAddition.Amount_at_Start__c = opportunity.Amount;
         iAddition.Close_Date_at_Start__c = opportunity.CloseDate;
         iAddition.Probability_At_Start__c = opportunity.Probability;
         iAddition.Opportunity__c = opportunity.Id;
 
-        //iAddition.Funnel_Addition_Target__c = QuotaConfig != null ? sFunneladditiontargetselector.GetByQuotaConfig
-        //(QuotaConfig.Id)[0].Id : null;
+
 
         for(Id key : AllTargets.keySet()) {
             Funnel_Addition_Target__c trg = AllTargets.get(key);
@@ -197,17 +196,13 @@ public with sharing class AnnualTargetUtils {
             }
         }
 
-        if(iAddition.Funnel_Addition_Target__c == null) {
-            Logger.Error('No Quota Configuration Found. Please Create Annual Quota Configuration for this Fiscal Year' +
-                    ' and associate it with ' + UserInfo.getUserName());
-        }
 
         if(!createNewOppData) {
             Map<Id, Period> pMap = new Map<Id,Period>(periodData);
             for(Id key : pMap.keySet()){
                 Period p = pMap.get(key);
                 if(p.StartDate <= iAddition.Close_Date_at_Start__c && p.EndDate >= iAddition.Close_Date_at_Start__c) {
-                    System.debug(p);
+                    //System.debug(p);
                     iAddition.Period__c = 'P' + p.Number;
                 }
             }
@@ -222,16 +217,16 @@ public with sharing class AnnualTargetUtils {
             for(Id key : pMap.keySet()){
                 Period p = pMap.get(key);
                 if(p.StartDate <= iAddition.Close_Date_at_Start__c && p.EndDate >= iAddition.Close_Date_at_Start__c) {
-                    System.debug(p);
+                    //System.debug(p);
                     iAddition.Period__c = 'P' + p.Number;
                 }
             }
 
         }
 
-        System.debug('[][]Creating new Funnel Addition [][][]');
-        System.debug(iAddition);
-
+        //System.debug('[][]Creating new Funnel Addition [][][]');
+        //System.debug(iAddition);
+        uow.RegisterNew(iAddition);
         return iAddition;
     }
 
@@ -290,6 +285,7 @@ public with sharing class AnnualTargetUtils {
 
     public Boolean IsMovedOutOfCurrentPeriod(Funnel_Addition__c addition, Opportunity opportunity, Boolean
             CustomPeriodOverride) {
+        System.debug('Checking if Moved Out of Current Period');
         Boolean value = false;
         if(CustomPeriodOverride == false) {
             DataUtil.SetStartOfPeriodValue(addition);
@@ -343,9 +339,8 @@ public with sharing class AnnualTargetUtils {
         addition.Current_Amount__c = opportunity.Amount;
     }
 
-    private void CreateNewFunnelAdditionTarget(Funnel_Addition__c addition) {
-        Funnel_Addition_Target__c newTarget = new Funnel_Addition_Target__c();
-
+    public void AddToCurrentTargets(Funnel_Addition_Target__c target) {
+        AllTargets.put(target.Id, target);
     }
 
     private Boolean IsThereExistingFAT(Funnel_Addition__c addition) {
@@ -387,6 +382,16 @@ public with sharing class AnnualTargetUtils {
         PeriodMapByFY = i_MappingPeriods;
 
 
+    }
+
+    public Funnel_Addition__c GetCurrentAddition(Opportunity opportunity) {
+        Funnel_Addition__c m_addition = new Funnel_Addition__c();
+        for(Funnel_Addition__c addition : ExistingAdditions) {
+            if(addition.Opportunity__c == opportunity.Id) {
+                m_addition = addition;
+            }
+        }
+        return m_addition;
     }
 
 

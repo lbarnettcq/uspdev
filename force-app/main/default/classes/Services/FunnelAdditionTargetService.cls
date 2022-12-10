@@ -34,4 +34,10 @@ public with sharing class FunnelAdditionTargetService {
         return newTargets;
     }
 
+    public void CreateNewFATWithNewConfig(List<Annual_Quota_Config__c> configs, UnitOfWork uow) {
+        for(Annual_Quota_Config__c config : configs) {
+
+        }
+    }
+
 }

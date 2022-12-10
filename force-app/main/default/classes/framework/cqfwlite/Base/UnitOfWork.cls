@@ -35,7 +35,7 @@ public with sharing class UnitOfWork implements iUnitOfWork{
     public class SimpleDML implements iDML {
         public void dmlUpsert(List<Sobject> objList, SObjectField field) {
             if (Test.isRunningTest()) {
-                System.debug('RECORDS BEING UPSERTED => ' + objList);
+                System.debug('RECORDS BEING UPSERTED => ' + objList[0].getSObjectType().getDescribe().getName());
             }
             Database.UpsertResult[] upsertResult = (Database.UpsertResult[]) Database.upsert(objList, field, false);
             for (Database.UpsertResult result : upsertResult) {
@@ -55,6 +55,7 @@ public with sharing class UnitOfWork implements iUnitOfWork{
                     System.debug('RECORDS BEING CREATED => ' + objList[0].getSObjectType().getDescribe().getName());
                 }
             }
+            /*
             Database.SaveResult[] insertResults = Database.insert(objList, false);
             for (Database.SaveResult result : insertResults) {
                 if (result.isSuccess()) { }
@@ -65,12 +66,19 @@ public with sharing class UnitOfWork implements iUnitOfWork{
                     }
                 }
             }
+            */
+            try {
+                insert objList;
+            }catch (Exception ex) {
+                System.debug(ex);
+            }
         }
         public void dmlUpdate(List<SObject> objList) {
             //update objList;
             if (Test.isRunningTest()) {
                 //System.debug('RECORDS BEING UPDATED => ' + objList);
             }
+            /*
             Database.SaveResult[] updateResult = Database.update(objList, false);
             for (Database.SaveResult result : updateResult) {
                 if (result.isSuccess()) { }
@@ -80,6 +88,12 @@ public with sharing class UnitOfWork implements iUnitOfWork{
                         System.debug(err.getStatusCode() + ': ' + err.getMessage());
                     }
                 }
+            }
+             */
+            try {
+                update objList;
+            }catch (Exception ex) {
+                System.debug(ex);
             }
         }
         public void dmlDelete(List<SObject> objList) {
@@ -562,9 +576,9 @@ public with sharing class UnitOfWork implements iUnitOfWork{
 
     private void insertDmlByType() {
         for (Schema.SObjectType sObjectType : m_sObjectTypes) {
-            System.debug('Insert SOBJECT => ' + sObjectType.getDescribe().getName());
+            //System.debug('Insert SOBJECT => ' + sObjectType.getDescribe().getName());
             m_relationships.get(SchemaHelper.GetDescribe(sObjectType).getName()).resolve();
-            System.debug('Relationships => ' + m_relationships.get(SchemaHelper.GetDescribe(sObjectType).getName()));
+            //System.debug('Relationships => ' + m_relationships.get(SchemaHelper.GetDescribe(sObjectType).getName()));
             if (SchemaHelper.IsSetupSObject(sObjectType)) {
                 System.runAs ( new User(Id = UserInfo.getUserId()) ) {
                     m_dml.dmlInsert(m_newListByType.get(SchemaHelper.GetDescribe(sObjectType).getName()));

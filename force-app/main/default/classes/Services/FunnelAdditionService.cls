@@ -28,9 +28,7 @@ public with sharing class FunnelAdditionService {
         List<Funnel_Addition__c> additions = [SELECT Id, Opportunity__c, Amount_at_Start__c, Current_Amount__c,
                 Current_Period__c, Close_Date_at_Start__c, Close_Date_at_End__c, Period__c, Funnel_Addition_Target__c
         FROM Funnel_Addition__c
-        WHERE
-                Opportunity__c
-                =: keyset];
+        WHERE Opportunity__c IN: keyset];
         data.put('current', additions);
 
         return data;
