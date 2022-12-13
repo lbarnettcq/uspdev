@@ -35,7 +35,8 @@ public with sharing class AnnualTargetSelector extends SObjectSelector {
                 Annual_Funnel_Addition_Target_Config__c.Target__c,
                 Annual_Funnel_Addition_Target_Config__c.CreatedById,
                 Annual_Funnel_Addition_Target_Config__c.LastModifiedById,
-                Annual_Funnel_Addition_Target_Config__c.CreatedDate
+                Annual_Funnel_Addition_Target_Config__c.CreatedDate,
+                Annual_Funnel_Addition_Target_Config__c.Territory_Manager__c
         };
     }
 

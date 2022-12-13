@@ -68,4 +68,24 @@ public with sharing class FunnelAdditionService {
         return newAddition;
     }
 
+    public Funnel_Addition__c CreateNewAddition(Opportunity opportunity, Funnel_Addition_Target__c target) {
+        Funnel_Addition__c iAddition = new Funnel_Addition__c();
+
+        iAddition.Close_Date_at_Start__c = opportunity.CloseDate;
+        iAddition.Amount_at_Start__c = opportunity.Amount;
+        iAddition.Current_Amount__c = opportunity.Amount;
+        iAddition.Period__c = target.Period__c;
+        iAddition.Current_Period__c = target.Period__c;
+        iAddition.Probability_At_Start__c = opportunity.Probability;
+        iAddition.Opportunity__c = opportunity.Id;
+
+        return iAddition;
+    }
+
+    public void UpdateExistingFunnelAddition(Funnel_Addition__c addition, Opportunity opportunity) {
+        if(addition.Current_Amount__c != opportunity.Amount) {
+            addition.Current_Amount__c = opportunity.Amount;
+        }
+    }
+
 }

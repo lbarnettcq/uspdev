@@ -70,8 +70,13 @@ public with sharing class OpportunityService {
             }
         }
 
+        if(annualQuotaConfigMap.isEmpty()) {
+            Logger.Warning('[OpportunityService Error] ==> No Annual Quota Config Found');
+
+        }
+
         AnnualTargetUtils.InitForOpps(newRecords.values());
-        List<Opportunity> m_NewFAOpps = new List<Opportunity>(); // List for Opps with Existing FAT
+        Map<Id, Opportunity> m_NewFAOpps = new Map<Id, Opportunity>(); // List for Opps with Existing FAT
         Map<String, Funnel_Addition_Target__c> targetMapping = new Map<String,Funnel_Addition_Target__c>();
         Map<Id, List<Opportunity>> QuotaConfigToOppMap = new Map<Id, List<Opportunity>>();
 
@@ -82,18 +87,11 @@ public with sharing class OpportunityService {
         {
             Opportunity newOpp = processOpps.get(key);
             if(AnnualTargetUtils.Utils.HasAccessToNewFeature(newOpp.OwnerId)) {
-                for(Id configKey : annualQuotaConfigMap.keySet()) {
+                for(Id configKey : annualQuotaConfigMap.keySet())
+                {
                     List<Funnel_Addition_Target__c> funnelAdditionTargets = quotaToTargetMap.get(configKey);
-                    List<Period> currentFYPeriods = new List<Period>();
-                    for(Period pYear : AnnualTargetUtils.PeriodMapByFY.keySet()) {
-                        if(newOpp.CloseDate.year() == pYear.StartDate.year())
-                        {
-                            currentFYPeriods = AnnualTargetUtils.PeriodMapByFY.get(pYear);
-                        }
-                    }
                     Boolean targetFound = false;
                     Funnel_Addition_Target__c i_target = new Funnel_Addition_Target__c();
-                    String pVal = '';
                     Annual_Quota_Config__c i_config = new Annual_Quota_Config__c();
                     if(quotaByFY.containsKey(String.valueOf(newOpp.CloseDate.year())))
                     {
@@ -114,19 +112,66 @@ public with sharing class OpportunityService {
 
                     }
 
-                    if(!quotaByFY.containsKey(String.valueOf(newOpp.CloseDate.year()))) {
-                        m_NewFAOpps.add(newOpp);
-                    }
 
 
+                }
+
+                if(!quotaByFY.containsKey(String.valueOf(newOpp.CloseDate.year()))) {
+                    m_NewFAOpps.put(newOpp.id, newOpp);
                 }
                 System.debug('Execution Complete for ===> ' + newOpp.Name);
             }
 
         }
+
         if(m_NewFAOpps.size() > 0) {
-            List<Annual_Quota_Config__c> NewConfigs = AnnualQuotaService.Action.CreateNewAnnualQuotaConfiguraitionForNewOpps(m_NewFAOpps, uow);
+            List<Annual_Quota_Config__c> NewConfigs = AnnualQuotaService.Action.CreateNewAnnualQuotaConfiguraitionForNewOpps(m_NewFAOpps.values(), uow);
+            List<Funnel_Addition_Target__c> targets = new List<Funnel_Addition_Target__c>();
+            for(Annual_Quota_Config__c n_Config : NewConfigs)
+            {
+                //Generate Targets for the Entire Fiscal Year
+                List<Funnel_Addition_Target__c> i_targets = FunnelAdditionTargetService.Action.GenerateNewTargetForQuotaConfiguration(n_Config);
+
+                for(Funnel_Addition_Target__c target : i_targets)
+                {
+                    //Register newly created Targets to UnitOfWork and Register their relationship with the
+                    // appropriate Config record
+                    target.Quote_Config__c = n_Config.Id;
+                    uow.RegisterNew(target, Funnel_Addition_Target__c.Quote_Config__c , n_Config);
+
+                    for(Id key : m_NewFAOpps.keySet())
+                    {
+                        Opportunity opp = m_NewFAOpps.get(key);
+                        if(target.Fiscal_Year__c == String.valueOf(opp.CloseDate.year()))
+                        {
+                            String pval = opp.CloseDate.month() == 1 ? 'P1' :
+                                            opp.CloseDate.month() == 2 ? 'P2' :
+                                                    opp.CloseDate.month() == 3 ? 'P3' :
+                                                            opp.CloseDate.month() == 4 ? 'P4' :
+                                                                    opp.CloseDate.month() == 5 ? 'P5' :
+                                                                            opp.CloseDate.month() == 6 ? 'P6' :
+                                                                                    opp.CloseDate.month() == 7 ? 'P7' :
+                                                                                            opp.CloseDate.month() == 8 ? 'P8' :
+                                                                                                    opp.CloseDate.month() == 9?'P9':
+                                                                                                            opp.CloseDate.month() == 10 ? 'P10' :
+                                                                                                                    opp.CloseDate.month() == 11 ? 'P11' : 'P12';
+
+                            if(target.Period__c == pval)
+                            {
+                                Funnel_Addition__c addition = FunnelAdditionService.Action.CreateNewAddition(opp, target);
+                                uow.RegisterNew(addition, Funnel_Addition__c.Funnel_Addition_Target__c, target);
+                                m_NewFAOpps.remove(key);
+                            }
+                        }
+                    }
+                }
+
+                //targets.addAll(i_targets);
+            }
+
         }
+
+        //Logic for Creating Funnel Additions with Existing Opps
 
         Logger.CommitLogs();
         uow.CommitWork();
@@ -135,45 +180,82 @@ public with sharing class OpportunityService {
 
 
     public void AfterUpdateActions(Map<Id, Opportunity> newRecords, Map<Id, Opportunity> oldRecords) {
-        List<Funnel_Addition__c> additionsToUpdate = new List<Funnel_Addition__c>();
-        List<Funnel_Addition__c> additionsToInsert = new List<Funnel_Addition__c>();
-        AnnualQuotaSelector quotaSelector = new AnnualQuotaSelector();
-        Map<Id, Annual_Quota_Config__c> annualQuotaConfigMap = new Map<Id, Annual_Quota_Config__c>();
-        annualQuotaConfigMap.putAll(quotaSelector.GetAll());
-        Map<Id, Funnel_Addition_Target__c> funnelAdditionTargetMap = new Map<Id, Funnel_Addition_Target__c>(
-        [
-                SELECT Id,
-                Quote_Config__c, Fiscal_Year__c, Rep__c, Territory__c, Amount_at_Start__c, Current_Amount__c
-                FROM
-                Funnel_Addition_Target__c
-                WHERE Quote_Config__c IN: annualQuotaConfigMap.keySet()
-        ]);
-        Map<Id, List<Funnel_Addition_Target__c>> quotaToTargetMap = new Map<Id, List<Funnel_Addition_Target__c>>();
         UnitOfWork uow = new UnitOfWork(SOBJECTS());
-        for(Id key : annualQuotaConfigMap.keySet()) {
-            Annual_Quota_Config__c config = annualQuotaConfigMap.get(key);
-            if(!quotaToTargetMap.containsKey(key)) {
-                List<Funnel_Addition_Target__c> targets = new List<Funnel_Addition_Target__c>();
-                for(Funnel_Addition_Target__c target : funnelAdditionTargetMap.values()) {
-                    if(target.Quote_Config__c == config.Id) { targets.add(target);}
-                }
-                if(targets.size() > 0) {
-                    quotaToTargetMap.put(config.Id, targets);
-                }
+
+        Map<Id, Opportunity> OppsWithFunnelAdditions = new Map<Id, Opportunity>();
+        Map<Id, Opportunity> OppsWithChangedCloseDates = new Map<Id, Opportunity>();
+        Map<Id, Opportunity> OppsMovedOutOfPeriod = new Map<Id, Opportunity>();
+
+        Map<Id, Funnel_Addition__c> CurrentAdditions = new Map<Id, Funnel_Addition__c>(
+        [SELECT Id, Period__c, Current_Period__c, Current_Amount__c, Probability_At_Start__c, Opportunity__c
+        FROM
+                Funnel_Addition__c
+        WHERE Opportunity__c IN: newRecords.keySet()
+        ]);
+
+        //Mapping of Funnel Addition Ids to their Opportunities
+        Map<Id, Opportunity> FunnelAdditionIdToOppMap = new Map<Id, Opportunity>();
+
+
+        for(Id key : CurrentAdditions.keySet())
+        {
+            Funnel_Addition__c iAddition = CurrentAdditions.get(key);
+            //See if there is a Funnel Addition for a current Opportunity
+            if(newRecords.keySet().contains(iAddition.Opportunity__c))
+            {
+                Opportunity opp = newRecords.get(iAddition.Opportunity__c);
+                OppsWithFunnelAdditions.put(opp.Id, opp);
+                FunnelAdditionIdToOppMap.put(iAddition.Id, opp);
             }
         }
-        Map<String, Funnel_Addition_Target__c> targetMapping = new Map<String, Funnel_Addition_Target__c>();
 
-        Map<String, Object> returnData = new Map<String, Object>();
         AnnualTargetUtils.InitForOpps(newRecords.values());
-        for(Id key : oldRecords.keySet()) {
-            Opportunity oldOpp = oldRecords.get(key);
-            if(AnnualTargetUtils.Utils.HasAccessToNewFeature(oldOpp.OwnerId)) {
-                if (newRecords.containsKey(key)) {
+
+        for(Id i_key : oldRecords.keySet())
+        {
+            Opportunity oldOpp = oldRecords.get(i_key);
+            if(newRecords.containsKey(i_key))
+            {
+                Opportunity opportunity = newRecords.get(i_key);
+                if(opportunity.CloseDate != oldOpp.CloseDate)
+                {
+                    OppsWithChangedCloseDates.put(i_key, opportunity);
+                }
+            }
+        }
+
+        for(Id mId : FunnelAdditionIdToOppMap.keySet())
+        {
+            Funnel_Addition__c mAddition = CurrentAdditions.get(mId);
+
+            if(OppsWithChangedCloseDates.containsKey(mAddition.Opportunity__c))
+            {
+                Opportunity opp = OppsWithChangedCloseDates.get(mAddition.Opportunity__c);
+                String periodValue = '';
+                List<Period> cPeriods = new List<Period>();
+                for(Period p : AnnualTargetUtils.PeriodMapByFY.keySet())
+                {
+                    if(p.StartDate.year() == Date.today().year())
+                    {
+                        cPeriods = AnnualTargetUtils.PeriodMapByFY.get(p);
+                    }
+                }
+
+                for(Period p : cPeriods)
+                {
+                    if(p.StartDate <= opp.CloseDate && p.EndDate >= opp.CloseDate)
+                    {
+                        periodValue = 'P' + p.Number;
+                    }
+                }
+
+                if(mAddition.Period__c != periodValue)
+                {
 
                 }
             }
         }
+
 
         uow.CommitWork();
         AnnualTargetUtils.CommitUtilLogs();
@@ -182,47 +264,10 @@ public with sharing class OpportunityService {
         Logger.CommitLogs();
     }
 
-    private Funnel_Addition_Target__c CreateNewTarget(String CurrentPeriod, Annual_Quota_Config__c config, UnitOfWork
-    uow) {
-        Funnel_Addition_Target__c iTarget= new Funnel_Addition_Target__c();
-        iTarget.Quote_Config__c = config.Id;
-        iTarget.Rep__c = config.Rep__c;
-        iTarget.Period__c = CurrentPeriod;
-        iTarget.Territory__c = config.Territory__c;
-        iTarget.Fiscal_Year__c = config.Fiscal_Year__c;
-        //TODO: Bulkify This, currently executing in a loop
-        uow.RegisterNew(iTarget);
-        return iTarget;
-    }
 
 
 
 
-    private Map<String, Object> Logic(Opportunity oldOpp, Opportunity newOpp, Funnel_Addition__c addition, UnitOfWork
-    uow) {
-        Map<String, Object> returnData = new Map<String, Object>();
-        List<Funnel_Addition__c> additionsToInsert = new List<Funnel_Addition__c>();
-        List<Funnel_Addition__c> additionsToUpdate = new List<Funnel_Addition__c>();
-        if (newOpp.CloseDate != oldOpp.CloseDate) {
-            if (AnnualTargetUtils.Utils.IsMovedOutOfCurrentPeriod(addition, newOpp, false)) {
-                additionsToInsert.add(AnnualTargetUtils.Utils.CreateNewFunnelAddition(newOpp, true, uow));
-                AnnualTargetUtils.Utils.UpdateAmountForCurrentFunnelAddition(addition, oldOpp);
-                additionsToUpdate.add(addition);
-            } else {
-                addition.Close_Date_at_End__c = newOpp.CloseDate;
-                AnnualTargetUtils.Utils.SetStartOfPeriodForAddition(addition);
-                AnnualTargetUtils.Utils.UpdateAmountForCurrentFunnelAddition(addition, newOpp);
-                additionsToUpdate.add(addition);
-            }
-        }
-        if (addition.Current_Amount__c != newOpp.Amount) {
-            addition.Current_Amount__c = newOpp.Amount;
-        }
-
-        returnData.put('toInsert', additionsToInsert);
-        returnData.put('toUpdate',  additionsToUpdate);
-        return  returnData;
-    }
 
 
     private static List<SObjectType> SOBJECTS()
@@ -235,6 +280,13 @@ public with sharing class OpportunityService {
                 Funnel_Addition__c.SObjectType
         };
     }
+
+    private virtual class OpportunityServiceException extends Exception { }
+    private class OpportunityServiceClassException extends OpportunityServiceException {
+        String message;
+    }
+
+
 
 
 

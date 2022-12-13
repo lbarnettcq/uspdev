@@ -68,7 +68,7 @@ public with sharing class AnnualQuotaService {
                             IsSeller__c = true,
                             AnnualTarget__c = config.Target__c,
                             Fiscal_Year__c = config.Fiscal_Year__c,
-                            Annual_Quote_Config_Name__c = 'FY ' + config.Fiscal_Year__c + ' Configuration'
+                            Name__c = 'FY ' + config.Fiscal_Year__c + ' Configuration'
                     ));
                 }else if(oppTeamMembersMap.containsKey(opportunity.Id)) {
                     List<OpportunityTeamMember> teamMembers = oppTeamMembersMap.get(opportunity.Id);
@@ -80,7 +80,7 @@ public with sharing class AnnualQuotaService {
                                     IsSeller__c = true,
                                     AnnualTarget__c = config.Target__c,
                                     Fiscal_Year__c = config.Fiscal_Year__c,
-                                    Annual_Quote_Config_Name__c = 'FY ' + config.Fiscal_Year__c + ' Configuration'
+                                    Name__c = 'FY ' + config.Fiscal_Year__c + ' Configuration'
                             ));
                         }
 
@@ -91,7 +91,7 @@ public with sharing class AnnualQuotaService {
                                     IsSeller__c = false,
                                     AnnualTarget__c = config.Target__c,
                                     Fiscal_Year__c = config.Fiscal_Year__c,
-                                    Annual_Quote_Config_Name__c = 'FY ' + config.Fiscal_Year__c + ' Configuration for' +
+                                    Name__c = 'FY ' + config.Fiscal_Year__c + ' Configuration for' +
                                             ' ' + member.UserId
                             ));
                         }

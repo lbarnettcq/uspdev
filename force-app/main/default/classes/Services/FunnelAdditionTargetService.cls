@@ -16,8 +16,24 @@ public with sharing class FunnelAdditionTargetService {
         }
     }
 
+    private static final List<Period> i_Periods = DefaultPeriodSelector.Instance.queryAll();
+    private static final List<FiscalYearSettings> iYEAR_SETTINGS = [SELECT Id, Name FROM FiscalYearSettings];
+
     public List<Funnel_Addition_Target__c> GenerateNewTargetForQuotaConfiguration(Annual_Quota_Config__c config) {
-        List<Period> fyPeriods = DefaultPeriodSelector.Instance.GetByFiscalYear(config.Fiscal_Year__c);
+        //List<Period> fyPeriods = DefaultPeriodSelector.Instance.GetByFiscalYear(config.Fiscal_Year__c);
+        List<Period> fyPeriods = new List<Period>();
+        for(Period period : i_Periods) {
+            if(period.Type == 'Month') {
+                for(FiscalYearSettings fiscalYearSettings : iYEAR_SETTINGS) {
+                    if(period.FiscalYearSettingsId == fiscalYearSettings.Id) {
+                        if(fiscalYearSettings.Name == config.Fiscal_Year__c) {
+                            fyPeriods.add(period);
+                        }
+                    }
+                }
+            }
+        }
+
         List<Funnel_Addition_Target__c> newTargets = new List<Funnel_Addition_Target__c>();
         if(!fyPeriods.isEmpty()) {
             for(Period p : fyPeriods) {

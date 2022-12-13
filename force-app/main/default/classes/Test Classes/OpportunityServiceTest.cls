@@ -15,7 +15,7 @@ private class OpportunityServiceTest {
     static void Setup() {
         TestDataFactory.insertUsers(true);
         TestDataFactory.loadFATConfiguration();
-        TestDataFactory.loadTestQuotaConfig();
+        //TestDataFactory.loadTestQuotaConfig();
         //TestDataFactory.loadTestFunnelAdditionTarget();
         //TestDataFactory.insertOpportunity();
     }
@@ -31,16 +31,19 @@ private class OpportunityServiceTest {
         Opportunity opp = OpportunitySelector.Instance.GetOne()[0];
         opp.CloseDate = opp.CloseDate.addDays(35);
         update opp;
+
         List<Funnel_Addition__c> additions = FunnelAdditionSelector.Instance.GetAll();
         System.assertNotEquals(additions, null);
-        //System.debug('### Created Funnel Additions ===> ' + additions.size());
-
+        for(Funnel_Addition__c addition : additions) {
+            System.debug(addition);
+        }
         //Test.startTest();
 
     }
 
     @IsTest
     static void MultipleOpportunityUpdateTest() {
+
         TestDataFactory.insertOpportunity();
         List<Opportunity> opportunities = OpportunitySelector.Instance.GetAll();
         for(Opportunity opportunity : opportunities) {
@@ -53,5 +56,12 @@ private class OpportunityServiceTest {
             }
         }
         update opportunities;
+
+
+        List<Funnel_Addition__c> additions = FunnelAdditionSelector.Instance.GetAll();
+        System.assertNotEquals(additions, null);
+        for(Funnel_Addition__c addition : additions) {
+            System.debug(addition);
+        }
     }
 }

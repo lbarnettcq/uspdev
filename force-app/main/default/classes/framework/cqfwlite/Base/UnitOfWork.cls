@@ -37,6 +37,7 @@ public with sharing class UnitOfWork implements iUnitOfWork{
             if (Test.isRunningTest()) {
                 System.debug('RECORDS BEING UPSERTED => ' + objList[0].getSObjectType().getDescribe().getName());
             }
+            /*
             Database.UpsertResult[] upsertResult = (Database.UpsertResult[]) Database.upsert(objList, field, false);
             for (Database.UpsertResult result : upsertResult) {
                 if(result.isSuccess() ) { }else if(result.isCreated()) {}
@@ -46,6 +47,13 @@ public with sharing class UnitOfWork implements iUnitOfWork{
                         //System.debug(error.getStatusCode() + ': ' + error.getMessage());
                     }
                 }
+            }
+
+             */
+            try {
+                upsert objList;
+            }catch (Exception ex) {
+                System.debug(ex);
             }
         }
         public void dmlInsert(List<SObject> objList) {

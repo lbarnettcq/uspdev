@@ -146,11 +146,32 @@ public with sharing class AnnualTargetUtils {
 
     public static void InitForOpps(List<Opportunity> opps) {
         //RunningOpps = opps;
-        CheckForExistingAdditions(opps);
+        //CheckForExistingAdditions(opps);
         ParseAccessForCurrentOppOwners(opps);
         DataUtil.Init(opps, false);
         ConfigPeriodMapping();
+        SetCurrentPeriodValue();
     }
+
+    public static String CURRENT_PERIOD;
+
+
+    public static void SetCurrentPeriodValue() {
+        List<Period> cPeriods = new List<Period>();
+        for(Period p : PeriodMapByFY.keySet()) {
+            if(p.StartDate.year() == Date.today().year()) {
+                cPeriods = PeriodMapByFY.get(p);
+            }
+        }
+
+        for(Period p : cPeriods) {
+            if(p.StartDate <= Date.today() && p.EndDate >= Date.today()) {
+                CURRENT_PERIOD = 'P' + p.Number;
+            }
+        }
+
+    }
+
 
     public static void CommitUtilLogs(){
         Logger.CommitLogs();
@@ -158,16 +179,6 @@ public with sharing class AnnualTargetUtils {
 
     private static List<Funnel_Addition__c> ExistingAdditions = new List<Funnel_Addition__c>();
 
-    /**
-    private static Annual_Quota_Config__c m_quotaConfig;
-    public static Annual_Quota_Config__c QuotaConfig {
-        get {
-            if(m_quotaConfig != null) { return m_quotaConfig; }
-            m_quotaConfig = new Annual_Quota_Config__c();
-            return m_quotaConfig;
-        }
-    }
-    */
     public static Annual_Quota_Config__c QuotaConfig = new Annual_Quota_Config__c();
 
     public Funnel_Addition__c CreateNewFunnelAddition(Opportunity opportunity, Boolean createNewOppData, UnitOfWork
@@ -226,7 +237,7 @@ public with sharing class AnnualTargetUtils {
 
         //System.debug('[][]Creating new Funnel Addition [][][]');
         //System.debug(iAddition);
-        uow.RegisterNew(iAddition);
+        //uow.RegisterNew(iAddition);
         return iAddition;
     }
 
@@ -251,10 +262,13 @@ public with sharing class AnnualTargetUtils {
         //FunnelAdditionSelector selector = new FunnelAdditionSelector()
         Boolean val = false;
         Integer i = 0;
-        while (val = false && i <= ExistingAdditions.size()) {
+        while (val = false && i <= ExistingAdditions.size())
+        {
             Funnel_Addition__c a = ExistingAdditions.get(i);
-            if(a != null) {
-                if(a.Opportunity__c == opportunity.Id) {
+            if(a != null)
+            {
+                if(a.Opportunity__c == opportunity.Id)
+                {
                     val = true ;
                 }
             }
@@ -314,7 +328,7 @@ public with sharing class AnnualTargetUtils {
             FROM CustomPermission
             WHERE DeveloperName = 'Use_New_FAT_Functionality')
         ];
-        Logger.Log(LoggingLevel.DEBUG,'[]Entity Access ===> ' + entityAccesses );
+        //Logger.Log(LoggingLevel.DEBUG,'[]Entity Access ===> ' + entityAccesses );
         for(SetupEntityAccess a : entityAccesses) {
             permissionSetIds.add(a.ParentId);
         }
@@ -337,26 +351,6 @@ public with sharing class AnnualTargetUtils {
 
     public void UpdateAmountForCurrentFunnelAddition(Funnel_Addition__c addition, Opportunity opportunity) {
         addition.Current_Amount__c = opportunity.Amount;
-    }
-
-    public void AddToCurrentTargets(Funnel_Addition_Target__c target) {
-        AllTargets.put(target.Id, target);
-    }
-
-    private Boolean IsThereExistingFAT(Funnel_Addition__c addition) {
-        Boolean val = false;
-
-        return val;
-    }
-
-    public String GetPeriodForOpp(Opportunity opportunity, Boolean CustomPeriodOverride) {
-        String value = '';
-        if(!CustomPeriodOverride) {
-            DefaultPeriodSelector selector = new DefaultPeriodSelector();
-            Period p = selector.GetWhereDateIn(opportunity.CloseDate)[0];
-            value = 'P' + p.Number;
-        }
-        return value;
     }
 
     private static void ConfigPeriodMapping() {
@@ -383,20 +377,5 @@ public with sharing class AnnualTargetUtils {
 
 
     }
-
-    public Funnel_Addition__c GetCurrentAddition(Opportunity opportunity) {
-        Funnel_Addition__c m_addition = new Funnel_Addition__c();
-        for(Funnel_Addition__c addition : ExistingAdditions) {
-            if(addition.Opportunity__c == opportunity.Id) {
-                m_addition = addition;
-            }
-        }
-        return m_addition;
-    }
-
-
-
-
-
 
 }
